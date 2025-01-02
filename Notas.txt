@@ -1,0 +1,31 @@
+Proyectos de Github de los que podemos sacar información a utilizar en el futuro
+
+El principal:
+https://github.com/pret/pokered
+
+2 de sus Forks:
+https://github.com/Vortyne/pureRGB
+https://github.com/jojobear13/shinpokered
+
+Listado de Forks:
+https://github.com/pret/pokered/forks
+
+Detalles del Funcionamiento del Juego, explicado en video:
+https://www.youtube.com/watch?v=b-cGPIgxxWg
+
+TIPOS:
+Agua
+Bicho
+Dragón
+Eléctrico
+Fantasma
+Fuego
+Hielo
+Lucha
+Normal
+Planta
+Psíquico
+Roca
+Tierra
+Veneno
+Volador
