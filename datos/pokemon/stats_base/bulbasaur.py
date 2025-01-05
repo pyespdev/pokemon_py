@@ -1,5 +1,5 @@
-{
-"nombre": "#001",
+bulbasaur = {
+"id": "#001",
 
 "nombre": "Bulbasaur", 
 "tipos": ["Planta", "Veneno"],

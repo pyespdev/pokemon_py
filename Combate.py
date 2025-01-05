@@ -7,6 +7,15 @@ import random
 """
 from Pokedex import pokemon_dict
 """
+ Importamos los Ataques, archivo donde estarán todos los Ataques (nombre, poder, tipo, precisión y pp)
+"""
+from Datos.Ataques import ataques
+"""
+ Importamos las estadísticas base de Bulbasaur, que usaremos como prueba
+"""
+from Datos.Pokemon.Stats_base.Bulbasaur import bulbasaur
+
+"""
  Creamos la clase Ataque con los atributos nombre que guardará el nombre del ataque
  y poder que guardará los puntos de daño de los ataques
 """
@@ -53,11 +62,15 @@ class Combate:
     def turno_atacar_jugador(self):
         print("\nAhora es tu turno para atacar. Puedes elegir entre los 3 ataques que tienes disponibles.")
         ataques_posibles = list(self.jugador.ataques.values())
-        elegir_ataque = int(input("Elige que ataque quieres hacer\n"
-                                  f"1- {ataques_posibles[0].nombre}\n"
-                                  f"2- {ataques_posibles[1].nombre}\n"
-                                  f"3- {ataques_posibles[2].nombre}\n"
-                                  "Tu opción --> "))
+        # Generar el mensaje con los ataques disponibles
+        mensaje_ataques = "Elige qué ataque quieres hacer:\n"
+        i=0
+        for ataque_nombre in self.jugador.ataques.values():
+            mensaje_ataques += f"{i+1}- {ataques_posibles[i].nombre}\n"
+            i=i+1
+        # Solicitar la entrada del usuario
+        elegir_ataque = int(input(mensaje_ataques + "Tu opción --> "))        
+
         if 1 <= elegir_ataque <= len(ataques_posibles):
             ataque_jugador = ataques_posibles[elegir_ataque - 1]
             print(f"¡Lanzas un ataque {ataque_jugador.nombre} y causas {ataque_jugador.poder} puntos de daño a {self.oponente.nombre}!.")
@@ -83,9 +96,14 @@ class Combate:
         # Usar zfill para agregar ceros a la izquierda y crear la cadena con #
         elegir_pokemon_oponente = f"#{str(elegir_pokemon_oponente).zfill(3)}"
         pokemon_oponente = Pokemon(pokemon_dict[elegir_pokemon_oponente]['nombre'], 130)
-        pokemon_oponente.agregar_ataque("Placaje", 40)
-        pokemon_oponente.agregar_ataque("Gruñido", 0)
-        pokemon_oponente.agregar_ataque("Látigo Cepa", 45)
+
+        # Recorrer el array de ataques de Bulbasaur
+        for ataque_nombre in bulbasaur["ataques"]:
+            # Obtener los detalles del ataque desde el diccionario `ataques`
+            ataque = ataques[ataque_nombre]
+            # Llamar al método agregar_ataque con el nombre y poder del ataque
+            pokemon_oponente.agregar_ataque(ataque["nombre"], ataque["poder"])
+        
         return pokemon_oponente
     
     def elegir_pokemon_jugador():
