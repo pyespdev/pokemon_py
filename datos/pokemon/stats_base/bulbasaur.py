@@ -1,4 +1,4 @@
-bulbasaur = {
+Bulbasaur = {
 "id": "#001",
 
 "nombre": "Bulbasaur", 

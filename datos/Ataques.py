@@ -10,5 +10,11 @@ ataques = {
              "poder": 0,
              "precision": 100,
              "pp": 40,
+             },
+    "Arañazo": {"nombre": "Arañazo", 
+             "tipo": "Normal",
+             "poder": 40,
+             "precision": 100,
+             "pp": 35,
              }
 }

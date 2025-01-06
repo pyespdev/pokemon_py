@@ -3,17 +3,13 @@
 """
 import random
 """
- Importamos la Pokedex, archivo donde están los Pokemon (nombres y tipos)
+ Importamos la Pokedex, archivo donde están los Pokemon (id, nombre y tipos)
 """
-from Pokedex import pokemon_dict
+from Pokedex import pokedex
 """
  Importamos los Ataques, archivo donde estarán todos los Ataques (nombre, poder, tipo, precisión y pp)
 """
 from Datos.Ataques import ataques
-"""
- Importamos las estadísticas base de Bulbasaur, que usaremos como prueba
-"""
-from Datos.Pokemon.Stats_base.Bulbasaur import bulbasaur
 
 """
  Creamos la clase Ataque con los atributos nombre que guardará el nombre del ataque
@@ -60,14 +56,14 @@ class Combate:
         print(f"Te quedan {self.jugador.vida} puntos de vida.")
 
     def turno_atacar_jugador(self):
-        print("\nAhora es tu turno para atacar. Puedes elegir entre los 3 ataques que tienes disponibles.")
+        print("\nAhora es tu turno para atacar. Puedes elegir entre los ataques que tienes disponibles.")
         ataques_posibles = list(self.jugador.ataques.values())
         # Generar el mensaje con los ataques disponibles
         mensaje_ataques = "Elige qué ataque quieres hacer:\n"
-        i=0
-        for ataque_nombre in self.jugador.ataques.values():
-            mensaje_ataques += f"{i+1}- {ataques_posibles[i].nombre}\n"
-            i=i+1
+        # Usando enumerate para obtener tanto el índice como el nombre del ataque
+        for index, ataque in enumerate(ataques_posibles):
+            mensaje_ataques += f"{index+1}- {ataque.nombre}\n"
+
         # Solicitar la entrada del usuario
         elegir_ataque = int(input(mensaje_ataques + "Tu opción --> "))        
 
@@ -81,11 +77,9 @@ class Combate:
 
  # Elegimos los Pokemon del Oponente y del Jugador desde la Pokedex eligiendo un número del 1 al 151
     def elegir_pokemon_oponente():
-        # Elegir Pokémon oponente con validación
         while True:
             try:
                 elegir_pokemon_oponente = int(input("Elige un pokemon para tu oponente. Del 1 al 151.\n"))
-                # Comprobar si el número está dentro del rango válido
                 if 1 <= elegir_pokemon_oponente <= 151:
                     break  # Salir del bucle si el número es válido
                 else:
@@ -95,10 +89,16 @@ class Combate:
                 print("¡Por favor ingresa un número válido entre 1 y 151.")
         # Usar zfill para agregar ceros a la izquierda y crear la cadena con #
         elegir_pokemon_oponente = f"#{str(elegir_pokemon_oponente).zfill(3)}"
-        pokemon_oponente = Pokemon(pokemon_dict[elegir_pokemon_oponente]['nombre'], 130)
+        pokedex_oponente = pokedex[elegir_pokemon_oponente]['nombre']
 
-        # Recorrer el array de ataques de Bulbasaur
-        for ataque_nombre in bulbasaur["ataques"]:
+        # Importar dinámicamente el Pokemon del Oponente usando __import__
+        module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_oponente}", fromlist=[pokedex_oponente])
+        # Acceder a la clase dentro del módulo importado
+        poke_oponente = getattr(module, pokedex_oponente)
+        pokemon_oponente = Pokemon(poke_oponente["nombre"], poke_oponente["vida"])
+
+        # Recorrer el array de ataques del Oponente
+        for ataque_nombre in poke_oponente["ataques"]:
             # Obtener los detalles del ataque desde el diccionario `ataques`
             ataque = ataques[ataque_nombre]
             # Llamar al método agregar_ataque con el nombre y poder del ataque
@@ -110,7 +110,6 @@ class Combate:
         while True:
             try:
                 elegir_pokemon_jugador = int(input("¡Muy bien!, ahora elige tu Pokemon. Del 1 al 151.\n"))
-                # Comprobar si el número está dentro del rango válido
                 if 1 <= elegir_pokemon_jugador <= 151:
                     break  # Salir del bucle si el número es válido
                 else:
@@ -120,10 +119,21 @@ class Combate:
                 print("¡Por favor ingresa un número válido entre 1 y 151.")
         # Usar zfill para agregar ceros a la izquierda y crear la cadena con #
         elegir_pokemon_jugador = f"#{str(elegir_pokemon_jugador).zfill(3)}"
-        pokemon_jugador = Pokemon(pokemon_dict[elegir_pokemon_jugador]['nombre'], 130)
-        pokemon_jugador.agregar_ataque("Arañazo", 40)
-        pokemon_jugador.agregar_ataque("Gruñido", 0)
-        pokemon_jugador.agregar_ataque("Ascuas", 40)
+        pokedex_jugador = pokedex[elegir_pokemon_jugador]['nombre']
+
+        # Importar dinámicamente el Pokemon del Jugador usando __import__
+        module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_jugador}", fromlist=[pokedex_jugador])
+        # Acceder a la clase dentro del módulo importado
+        poke_jugador = getattr(module, pokedex_jugador)
+        pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["vida"])
+
+        # Recorrer el array de ataques del Oponente
+        for ataque_nombre in poke_jugador["ataques"]:
+            # Obtener los detalles del ataque desde el diccionario `ataques`
+            ataque = ataques[ataque_nombre]
+            # Llamar al método agregar_ataque con el nombre y poder del ataque
+            pokemon_jugador.agregar_ataque(ataque["nombre"], ataque["poder"])
+        
         return pokemon_jugador
 
 # Explicación del juego, componentes y dinámica
@@ -156,9 +166,3 @@ class Combate:
 """
 combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_oponente())
 combate.jugar()
-
-"""
- Siguientes Commits propuestos:
-  - Cambiar en el método elegir_ataque() las opciones puestas a mano,
-  - Controlar la entrada del usuario de modo que se garantice que el jugador elija un número válido entre 1 y 151
-"""

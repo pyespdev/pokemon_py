@@ -1,4 +1,4 @@
-pokemon_dict = {
+pokedex = {
     "#001": {"nombre": "Bulbasaur", "tipos": ["Planta", "Veneno"]},
     "#002": {"nombre": "Ivysaur", "tipos": ["Planta", "Veneno"]},
     "#003": {"nombre": "Venusaur", "tipos": ["Planta", "Veneno"]},
