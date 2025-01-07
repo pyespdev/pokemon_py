@@ -1,15 +1,6 @@
-"""
- Importamos la funcion random para el ataque del Pokemon Oponente
-"""
-import random
-"""
- Importamos la Pokedex, archivo donde están los Pokemon (id, nombre y tipos)
-"""
-from Pokedex import pokedex
-"""
- Importamos los Ataques, archivo donde estarán todos los Ataques (nombre, poder, tipo, precisión y pp)
-"""
-from Datos.Ataques import ataques
+import random                       # Para el ataque del Pokemon Oponente
+from Pokedex import pokedex         # Archivo donde están los Pokemon (id, nombre y tipos)
+from Datos.Ataques import ataques   # Archivo donde estarán todos los Ataques (nombre, poder, tipo, precisión y pp)
 
 """
  Creamos la clase Ataque con los atributos nombre que guardará el nombre del ataque
@@ -41,7 +32,7 @@ class Pokemon:
             self.vida = 0
 """
  Creamos la clase Combate que contendrá el Pokemon del jugador y del oponente
- y los turnos de ataque de jugador y oponente. Empezará atacando el oponente.
+ y los turnos de ataque de jugador y oponente.
 """
 class Combate:
     def __init__(self, jugador: Pokemon, oponente: Pokemon) -> None:
@@ -75,7 +66,7 @@ class Combate:
         else:
             print("¡Has perdido el turno! No elegiste un ataque válido.")
 
- # Elegimos los Pokemon del Oponente y del Jugador desde la Pokedex eligiendo un número del 1 al 151
+    # Elegimos los Pokemon del Oponente y del Jugador desde la Pokedex eligiendo un número del 1 al 151
     def elegir_pokemon_oponente():
         while True:
             try:
@@ -95,7 +86,8 @@ class Combate:
         module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_oponente}", fromlist=[pokedex_oponente])
         # Acceder a la clase dentro del módulo importado
         poke_oponente = getattr(module, pokedex_oponente)
-        pokemon_oponente = Pokemon(poke_oponente["nombre"], poke_oponente["vida"])
+        nivel = 3   # Ponemos un nivel para calcular provisionalmente la vida
+        pokemon_oponente = Pokemon(poke_oponente["nombre"], poke_oponente["vida"] * nivel)
 
         # Recorrer el array de ataques del Oponente
         for ataque_nombre in poke_oponente["ataques"]:
@@ -125,7 +117,8 @@ class Combate:
         module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_jugador}", fromlist=[pokedex_jugador])
         # Acceder a la clase dentro del módulo importado
         poke_jugador = getattr(module, pokedex_jugador)
-        pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["vida"])
+        nivel = 3   # Ponemos un nivel para calcular provisionalmente la vida
+        pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["vida"] * nivel)
 
         # Recorrer el array de ataques del Oponente
         for ataque_nombre in poke_jugador["ataques"]:
@@ -136,13 +129,13 @@ class Combate:
         
         return pokemon_jugador
 
-# Explicación del juego, componentes y dinámica
+    # Explicación del juego, componentes y dinámica
     def jugar(self):
         print(f"** COMBATE POKEMON -- {self.oponente.nombre} contra {self.jugador.nombre} **")
         print(f"Te reto a un combate entre personajes Pokemon. Yo controlo a {self.oponente.nombre} y tú a {self.jugador.nombre}.")
         print("Combatimos mientras ambos tengamos vida.\n")
         input(self.pulsa_para_continuar)
-
+        # Empezará atacando el oponente.
         while self.jugador.vida > 0 and self.oponente.vida > 0:
             self.turno_atacar_oponente()
             if self.jugador.vida == 0:
@@ -160,9 +153,14 @@ class Combate:
         if self.oponente.vida == 0:
             print(f"\n¡ENHORABUENA! Has derrotado a {self.oponente.nombre}.")
         print("\nEspero volver a verte pronto.")
-"""
- Creamos un nuevo Combate con dos nuevos Pokemon:
- El primer Pokemon que pasamos como argumento es el del jugador y el segundo el del oponente
-"""
+
+# Generamos el Combate
 combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_oponente())
 combate.jugar()
+
+"""
+Propuesta de Siguientes Commits:
+- Implementar los Efectos Especiales de los Ataques
+- Implementar los Tipos (Efectividad entre ellos)
+- Utilizar las Stats_base
+"""
