@@ -1,0 +1,38 @@
+Lista de Comandos Git
+----------------------------------------------------------------------------------
+mkdir pyespdev
+cd pyespdev/
+git clone https://github.com/pyespdev/pokemon_py.git
+cd pokemon_py/
+
+git checkout -b pokemon
+
+git config --global user.name "pyespdev"
+git config --global user.email pyespdev@hotmail.com
+
+	# Generar la clave SSH:
+ssh-keygen -t rsa -b 4096 -C "pyespdev@hotmail.com"
+	· Esto generará una nueva clave SSH. Puedes presionar "Enter" cuando se te pida confirmar la ubicación del archivo (la ubicación predeterminada es ~/.ssh/id_rsa).
+	# Agregar la nueva clave SSH al agente SSH para que Git la pueda usar:
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+	# Copiar la clave SSH pública para agregarla a GitHub
+cat ~/.ssh/id_rsa.pub
+	· Copia el contenido que aparece.
+	# Agregar la clave SSH a GitHub
+Inicia sesión en tu cuenta de GitHub.
+Ve a Settings (Configuraciones) > SSH and GPG keys > New SSH key.
+Pega la clave SSH que copiaste en el paso anterior en el campo "Key" y asigna un título descriptivo.
+Haz clic en Add SSH key.
+	# Probar la conexión SSH con GitHub
+ssh -T git@github.com
+	· Deberías recibir un mensaje de bienvenida como:
+· Hi <tu_usuario>! You've successfully authenticated, but GitHub does not provide shell access.
+	# Asegurarte de usar la URL SSH del repositorio
+git remote set-url origin git@github.com:pyespdev/pokemon_py.git
+
+git status
+git add Pokedex.py
+git commit -m "Añadido pokemon_dict con los 151 Pokemon"
+git push origin pokemon
+----------------------------------------------------------------------------------
