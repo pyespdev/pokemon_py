@@ -1,14 +1,13 @@
-import random                       # Para el ataque del Pokemon Oponente
+import random                       # Para el ataque del Pokemon Oponente (de momento)
 from Pokedex import pokedex         # Archivo donde están los Pokemon (id, nombre y tipos)
-from Datos.Ataques import ataques   # Archivo donde estarán todos los Ataques (nombre, poder, tipo, precisión y pp)
+from Datos.Ataques import ataques   # Archivo donde estarán todos los Ataques y sus características
 
-"""
- Creamos la clase Ataque con los atributos nombre que guardará el nombre del ataque
- y poder que guardará los puntos de daño de los ataques
-"""
+# Clase Ataque con los atributos nombre, tipo, clase y poder
 class Ataque:
-    def __init__(self, nombre: str, poder: int) -> None:
+    def __init__(self, nombre: str, tipo: str, clase: str, poder: int) -> None:
         self.nombre = nombre
+        self.tipo = tipo
+        self.clase = clase
         self.poder = poder
 """
  Creamos la clase Pokemon con los atributos nombre, vida y ataques
@@ -20,8 +19,8 @@ class Pokemon:
         self.vida = vida
         self.ataques = {}
 
-    def agregar_ataque(self, nombre: str, poder: int):
-        self.ataques[nombre] = Ataque(nombre, poder)
+    def agregar_ataque(self, nombre: str, tipo: str, clase: str, poder: int):
+        self.ataques[nombre] = Ataque(nombre, tipo, clase, poder)
 
     def elegir_ataque(self, nombre_ataque: str):
         return self.ataques.get(nombre_ataque)
@@ -30,10 +29,9 @@ class Pokemon:
         self.vida -= ataque.poder
         if self.vida < 0:
             self.vida = 0
-"""
- Creamos la clase Combate que contendrá el Pokemon del jugador y del oponente
- y los turnos de ataque de jugador y oponente.
-"""
+
+# Clase Combate donde se desarrolla el juego
+# Se eligen los Pokemon de Jugador y Oponente y sus turnos
 class Combate:
     def __init__(self, jugador: Pokemon, oponente: Pokemon) -> None:
         self.jugador = jugador
@@ -93,8 +91,8 @@ class Combate:
         for ataque_nombre in poke_oponente["ataques"]:
             # Obtener los detalles del ataque desde el diccionario `ataques`
             ataque = ataques[ataque_nombre]
-            # Llamar al método agregar_ataque con el nombre y poder del ataque
-            pokemon_oponente.agregar_ataque(ataque["nombre"], ataque["poder"])
+            # Llamar al método agregar_ataque con el nombre, tipo, clase y poder del ataque
+            pokemon_oponente.agregar_ataque(ataque["nombre"], ataque["tipo"], ataque["clase"], ataque["poder"])
         
         return pokemon_oponente
     
@@ -120,12 +118,12 @@ class Combate:
         nivel = 3   # Ponemos un nivel para calcular provisionalmente la vida
         pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["vida"] * nivel)
 
-        # Recorrer el array de ataques del Oponente
+        # Recorrer el array de ataques del Jugador
         for ataque_nombre in poke_jugador["ataques"]:
             # Obtener los detalles del ataque desde el diccionario `ataques`
             ataque = ataques[ataque_nombre]
-            # Llamar al método agregar_ataque con el nombre y poder del ataque
-            pokemon_jugador.agregar_ataque(ataque["nombre"], ataque["poder"])
+            # Llamar al método agregar_ataque con el nombre, tipo, clase y poder del ataque
+            pokemon_jugador.agregar_ataque(ataque["nombre"], ataque["tipo"], ataque["clase"], ataque["poder"])
         
         return pokemon_jugador
 
