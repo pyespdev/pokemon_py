@@ -13,8 +13,9 @@ class Ataque:
 # Clase Pokemon con los atributos nombre, stats y ataques
 # y los métodos para agregar, elegir y recibir ataques
 class Pokemon:
-    def __init__(self, nombre: str, stats: str) -> None:
+    def __init__(self, nombre: str, tipos: str, stats: str) -> None:
         self.nombre = nombre
+        self.tipos = tipos
         self.vida = stats['vida']
         self.ataque = stats['ataque']
         self.defensa = stats['defensa']
@@ -29,9 +30,48 @@ class Pokemon:
         return self.ataques.get(nombre_ataque)
 
     def recibir_ataque(self, ataque: Ataque):
+        self.comparar_tipo_defensor(ataque)
         self.vida -= ataque.poder
         if self.vida < 0:
             self.vida = 0
+    """
+    Introducimos la comparación de tipos entre Pokemon y Ataque para posteriormente
+    calcular la Fórmula del daño directo, que será algo como esto:
+        
+    Daño = P1 * (P2 / P3 + 2)
+
+        P1 = 0.01 * $B * $E *V
+        P2 = (0.2 * $N + 1) * $A * $P
+        P3 = 25 / $D
+
+        $B = Bonificación
+        $E = Efectividad
+        $V = Variación
+        $N = Nivel
+        $A = Ataque / Especial
+        $P = Poder de Ataque
+        $D = Defensa / Especial
+    """
+    # $B
+    # Bonificación: si el ataque es del mismo tipo que el Pokemon que lo lanza toma un valor de 1,5
+    # si el ataque es de un tipo diferente que el Pokemon que lo lanza toma un valor de 1.
+    def comparar_tipo_atacante(self, ataque: Ataque):
+        if self.tipos[0] == ataque.tipo :
+            print(f"{self.nombre}, que realiza el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
+        else:
+            print(f"{self.nombre}, que realiza el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
+
+    # $E
+    # Efectividad que podrá tener los valores 0, 0.25, 0.5, 1, 2 y 4
+    # en función de la Relación entre Tipos
+    def comparar_tipo_defensor(self, ataque: Ataque):
+        if ataque.tipo == self.tipos[0] :
+            print(f"{self.nombre}, que recibe el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
+        else:
+            print(f"{self.nombre}, que recibe el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
+
+    # $V
+    # Variación que tendrá un valor entre 85 y 100 (incluidos)
 
 # Clase Combate donde se desarrolla el juego
 # Se eligen los Pokemon de Jugador y Oponente y sus turnos
@@ -43,6 +83,7 @@ class Combate:
 
     def turno_atacar_oponente(self):
         ataque_oponente = random.choice(list(self.oponente.ataques.values()))
+        self.oponente.comparar_tipo_atacante(ataque_oponente)
         print(f"{self.oponente.nombre} usa {ataque_oponente.nombre} y causa {ataque_oponente.poder} puntos de daño.")
         self.jugador.recibir_ataque(ataque_oponente)
         print(f"Te quedan {self.jugador.vida} puntos de vida.")
@@ -59,6 +100,7 @@ class Combate:
 
         if 1 <= elegir_ataque <= len(ataques_posibles):
             ataque_jugador = ataques_posibles[elegir_ataque - 1]
+            self.jugador.comparar_tipo_atacante(ataque_jugador)
             print(f"¡Lanzas un ataque {ataque_jugador.nombre} y causas {ataque_jugador.poder} puntos de daño a {self.oponente.nombre}!.")
             self.oponente.recibir_ataque(ataque_jugador)
             print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
@@ -85,8 +127,7 @@ class Combate:
         module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_oponente}", fromlist=[pokedex_oponente])
         # Acceder a la clase dentro del módulo importado
         poke_oponente = getattr(module, pokedex_oponente)
-        # En vez de vida pasar stats
-        pokemon_oponente = Pokemon(poke_oponente["nombre"], poke_oponente["stats"])
+        pokemon_oponente = Pokemon(poke_oponente["nombre"], poke_oponente["tipos"], poke_oponente["stats"])
 
         # Recorrer el array de ataques del Oponente
         for ataque_nombre in poke_oponente["ataques"]:
@@ -116,8 +157,7 @@ class Combate:
         module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_jugador}", fromlist=[pokedex_jugador])
         # Acceder a la clase dentro del módulo importado
         poke_jugador = getattr(module, pokedex_jugador)
-        # En vez de vida pasar stats
-        pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["stats"])
+        pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["tipos"], poke_jugador["stats"])
 
         # Recorrer el array de ataques del Jugador
         for ataque_nombre in poke_jugador["ataques"]:
@@ -159,7 +199,11 @@ combate.jugar()
 
 """
 Propuesta de Siguientes Commits:
+- Terminar de Implementar los Tipos (Efectividad entre ellos)
 - Implementar los Efectos Especiales de los Ataques
-- Implementar los Tipos (Efectividad entre ellos)
-- Utilizar las Stats_base
+"""
+
+"""
+Para saber si la clase del Ataque es Físico o Especial, vale con saber el tipo.
+Habrá que revisar/quitar el atributo clase en los Ataques
 """
