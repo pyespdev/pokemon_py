@@ -9,14 +9,17 @@ class Ataque:
         self.tipo = tipo
         self.clase = clase
         self.poder = poder
-"""
- Creamos la clase Pokemon con los atributos nombre, vida y ataques
- y los métodos para agregar, elegir y recibir ataques
-"""
+
+# Clase Pokemon con los atributos nombre, stats y ataques
+# y los métodos para agregar, elegir y recibir ataques
 class Pokemon:
-    def __init__(self, nombre: str, vida: int) -> None:
+    def __init__(self, nombre: str, stats: str) -> None:
         self.nombre = nombre
-        self.vida = vida
+        self.vida = stats['vida']
+        self.ataque = stats['ataque']
+        self.defensa = stats['defensa']
+        self.velocidad = stats['velocidad']
+        self.especial = stats['especial']
         self.ataques = {}
 
     def agregar_ataque(self, nombre: str, tipo: str, clase: str, poder: int):
@@ -47,13 +50,11 @@ class Combate:
     def turno_atacar_jugador(self):
         print("\nAhora es tu turno para atacar. Puedes elegir entre los ataques que tienes disponibles.")
         ataques_posibles = list(self.jugador.ataques.values())
-        # Generar el mensaje con los ataques disponibles
         mensaje_ataques = "Elige qué ataque quieres hacer:\n"
         # Usando enumerate para obtener tanto el índice como el nombre del ataque
         for index, ataque in enumerate(ataques_posibles):
             mensaje_ataques += f"{index+1}- {ataque.nombre}\n"
 
-        # Solicitar la entrada del usuario
         elegir_ataque = int(input(mensaje_ataques + "Tu opción --> "))        
 
         if 1 <= elegir_ataque <= len(ataques_posibles):
@@ -84,8 +85,8 @@ class Combate:
         module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_oponente}", fromlist=[pokedex_oponente])
         # Acceder a la clase dentro del módulo importado
         poke_oponente = getattr(module, pokedex_oponente)
-        nivel = 3   # Ponemos un nivel para calcular provisionalmente la vida
-        pokemon_oponente = Pokemon(poke_oponente["nombre"], poke_oponente["vida"] * nivel)
+        # En vez de vida pasar stats
+        pokemon_oponente = Pokemon(poke_oponente["nombre"], poke_oponente["stats"])
 
         # Recorrer el array de ataques del Oponente
         for ataque_nombre in poke_oponente["ataques"]:
@@ -115,8 +116,8 @@ class Combate:
         module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_jugador}", fromlist=[pokedex_jugador])
         # Acceder a la clase dentro del módulo importado
         poke_jugador = getattr(module, pokedex_jugador)
-        nivel = 3   # Ponemos un nivel para calcular provisionalmente la vida
-        pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["vida"] * nivel)
+        # En vez de vida pasar stats
+        pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["stats"])
 
         # Recorrer el array de ataques del Jugador
         for ataque_nombre in poke_jugador["ataques"]:
