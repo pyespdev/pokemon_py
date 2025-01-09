@@ -58,12 +58,15 @@ class Pokemon:
     def comparar_tipo_atacante(self, ataque: Ataque):
         if self.tipos[0] == ataque.tipo :
             print(f"{self.nombre}, que realiza el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
+            bonificacion = 1.5
         else:
             print(f"{self.nombre}, que realiza el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
+            bonificacion = 1
+        return bonificacion
 
     # $E
     # Efectividad que podrá tener los valores 0, 0.25, 0.5, 1, 2 y 4
-    # en función de la Relación entre Tipos
+    # en función de la Relación entre Tipos (Archivo Debilidades)
     def comparar_tipo_defensor(self, ataque: Ataque):
         if ataque.tipo == self.tipos[0] :
             print(f"{self.nombre}, que recibe el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
@@ -72,6 +75,11 @@ class Pokemon:
 
     # $V
     # Variación que tendrá un valor entre 85 y 100 (incluidos)
+    variacion = random(85,100)
+    print(f"El Número de Variación ha sido {variacion}.")
+
+    # P1 (Primera parte de la Fórmula del daño directo)
+    # P1 = 0.01 * bonificacion * efectividad * variacion
 
 # Clase Combate donde se desarrolla el juego
 # Se eligen los Pokemon de Jugador y Oponente y sus turnos
