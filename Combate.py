@@ -2,12 +2,11 @@ import random                       # Para el ataque del Pokemon Oponente (de mo
 from Pokedex import pokedex         # Archivo donde están los Pokemon (id, nombre y tipos)
 from Datos.Ataques import ataques   # Archivo donde estarán todos los Ataques y sus características
 
-# Clase Ataque con los atributos nombre, tipo, clase y poder
+# Clase Ataque con los atributos nombre, tipo y poder
 class Ataque:
-    def __init__(self, nombre: str, tipo: str, clase: str, poder: int) -> None:
+    def __init__(self, nombre: str, tipo: str, poder: int) -> None:
         self.nombre = nombre
         self.tipo = tipo
-        self.clase = clase
         self.poder = poder
 
 # Clase Pokemon con los atributos nombre, stats y ataques
@@ -23,8 +22,8 @@ class Pokemon:
         self.especial = stats['especial']
         self.ataques = {}
 
-    def agregar_ataque(self, nombre: str, tipo: str, clase: str, poder: int):
-        self.ataques[nombre] = Ataque(nombre, tipo, clase, poder)
+    def agregar_ataque(self, nombre: str, tipo: str, poder: int):
+        self.ataques[nombre] = Ataque(nombre, tipo, poder)
 
     def elegir_ataque(self, nombre_ataque: str):
         return self.ataques.get(nombre_ataque)
@@ -51,7 +50,16 @@ class Pokemon:
         $A = Ataque / Especial
         $P = Poder de Ataque
         $D = Defensa / Especial
+
+    Para saber la clase del Ataque (Físico o Especial), vale con saber el tipo.
+    tipos = ["Agua", "Bicho", "Dragón", "Eléctrico", "Fantasma", "Fuego", "Hielo", "Lucha", "Normal", "Planta", "Psíquico", "Roca", "Tierra", "Veneno", "Volador"]
+    ataques_fisicos = ["Bicho", "Fantasma", "Lucha", "Normal", "Roca", "Tierra", "Veneno", "Volador"]
+    ataques_especiales = ["Agua", "Dragón", "Eléctrico", "Fuego", "Hielo", "Planta", "Psíquico"]
     """
+    
+    # P1 (Primera parte de la Fórmula del daño directo)
+    # P1 = 0.01 * bonificacion * efectividad * variacion
+
     # $B
     # Bonificación: si el ataque es del mismo tipo que el Pokemon que lo lanza toma un valor de 1,5
     # si el ataque es de un tipo diferente que el Pokemon que lo lanza toma un valor de 1.
@@ -75,11 +83,24 @@ class Pokemon:
 
     # $V
     # Variación que tendrá un valor entre 85 y 100 (incluidos)
-    variacion = random(85,100)
+    variacion = random.randint(85,100)
     print(f"El Número de Variación ha sido {variacion}.")
 
-    # P1 (Primera parte de la Fórmula del daño directo)
-    # P1 = 0.01 * bonificacion * efectividad * variacion
+    # P2 (Segunda parte de la Fórmula del daño directo)
+    # P2 = (0.2 * nivel + 1) * clase_Ataque * Poder_ataque
+    def comparar_tipo_ataque(self, ataque: Ataque):
+        ataques_fisicos = ["Bicho", "Fantasma", "Lucha", "Normal", "Roca", "Tierra", "Veneno", "Volador"]
+        if ataque.tipo in ataques_fisicos:
+            clase_ataque = "Físico"
+            print(f"{self.nombre}, realiza un ataque es de clase {clase_ataque}, ya que es de tipo {ataque.tipo}.")
+        else:
+        # ataques_especiales = ["Agua", "Dragón", "Eléctrico", "Fuego", "Hielo", "Planta", "Psíquico"]
+            clase_ataque = "Especial"
+            print(f"{self.nombre}, realiza un ataque es de clase {clase_ataque}, ya que es de tipo {ataque.tipo}.")
+        return clase_ataque
+    # P3 (Tercera parte de la Fórmula del daño directo)
+    # P3 = 25 / tipo_Defensa
+    # Sera Defensa / Especial según el tipo de Ataque, se debería implentar en comparar_tipo_ataque()
 
 # Clase Combate donde se desarrolla el juego
 # Se eligen los Pokemon de Jugador y Oponente y sus turnos
@@ -141,8 +162,8 @@ class Combate:
         for ataque_nombre in poke_oponente["ataques"]:
             # Obtener los detalles del ataque desde el diccionario `ataques`
             ataque = ataques[ataque_nombre]
-            # Llamar al método agregar_ataque con el nombre, tipo, clase y poder del ataque
-            pokemon_oponente.agregar_ataque(ataque["nombre"], ataque["tipo"], ataque["clase"], ataque["poder"])
+            # Llamar al método agregar_ataque con el nombre, tipo y poder del ataque
+            pokemon_oponente.agregar_ataque(ataque["nombre"], ataque["tipo"], ataque["poder"])
         
         return pokemon_oponente
     
@@ -171,8 +192,8 @@ class Combate:
         for ataque_nombre in poke_jugador["ataques"]:
             # Obtener los detalles del ataque desde el diccionario `ataques`
             ataque = ataques[ataque_nombre]
-            # Llamar al método agregar_ataque con el nombre, tipo, clase y poder del ataque
-            pokemon_jugador.agregar_ataque(ataque["nombre"], ataque["tipo"], ataque["clase"], ataque["poder"])
+            # Llamar al método agregar_ataque con el nombre, tipo y poder del ataque
+            pokemon_jugador.agregar_ataque(ataque["nombre"], ataque["tipo"], ataque["poder"])
         
         return pokemon_jugador
 
@@ -209,9 +230,4 @@ combate.jugar()
 Propuesta de Siguientes Commits:
 - Terminar de Implementar los Tipos (Efectividad entre ellos)
 - Implementar los Efectos Especiales de los Ataques
-"""
-
-"""
-Para saber si la clase del Ataque es Físico o Especial, vale con saber el tipo.
-Habrá que revisar/quitar el atributo clase en los Ataques
 """
