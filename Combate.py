@@ -1,6 +1,7 @@
 import random                       # Para el ataque del Pokemon Oponente (de momento)
 from Pokedex import pokedex         # Archivo donde están los Pokemon (id, nombre y tipos)
 from Datos.Ataques import ataques   # Archivo donde estarán todos los Ataques y sus características
+from Datos.Debilidades import debilidades   # Debilidades de cada Tipo
 
 # Clase Ataque con los atributos nombre, tipo y poder
 class Ataque:
@@ -73,7 +74,7 @@ class Pokemon:
         return bonificacion
 
     # $E
-    # Efectividad que podrá tener los valores 0, 0.25, 0.5, 1, 2 y 4
+    # Efectividad que podrá tener los valores 0, 0.5, 1 y 2.
     # en función de la Relación entre Tipos (Archivo Debilidades)
     def comparar_tipo_defensor(self, ataque: Ataque):
         if ataque.tipo == self.tipos[0] :
@@ -81,6 +82,20 @@ class Pokemon:
         else:
             print(f"{self.nombre}, que recibe el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
 
+        if ataque.tipo in debilidades[self.tipos[0]]["débil"] :
+            print(f"Es muy efectivo. El daño es * 2")
+            efectividad = 2
+        elif ataque.tipo in debilidades[self.tipos[0]]["resistente"] :
+            print(f"No es muy efectivo. El daño es * 0,5")
+            efectividad = 0.5
+        elif ataque.tipo in debilidades[self.tipos[0]]["inmune"] :
+            print(f"No afecta. El daño es * 0")
+            efectividad = 0
+        else: 
+            print(f"El daño es normal * 1")
+            efectividad = 1
+        return efectividad
+    
     # $V
     # Variación que tendrá un valor entre 85 y 100 (incluidos)
     variacion = random.randint(85,100)
