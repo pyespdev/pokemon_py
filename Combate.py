@@ -57,7 +57,13 @@ class Pokemon:
     ataques_fisicos = ["Bicho", "Fantasma", "Lucha", "Normal", "Roca", "Tierra", "Veneno", "Volador"]
     ataques_especiales = ["Agua", "Dragón", "Eléctrico", "Fuego", "Hielo", "Planta", "Psíquico"]
     """
-    
+    def calcular_daño_total (bonificacion, efectividad, variacion, nivel, clase_ataque, poder_ataque, clase_defensa):
+        P1 = 0.01 * bonificacion * efectividad * variacion
+        P2 = 0.2 * (nivel + 1) * clase_ataque * poder_ataque
+        P3 = 25 / clase_defensa
+        daño_total = P1 * (P2 / P3 + 2)
+        return daño_total
+
     # P1 (Primera parte de la Fórmula del daño directo)
     # P1 = 0.01 * bonificacion * efectividad * variacion
 
