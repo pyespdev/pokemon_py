@@ -13,14 +13,15 @@ class Ataque:
 # Clase Pokemon con los atributos nombre, stats y ataques
 # y los métodos para agregar, elegir y recibir ataques
 class Pokemon:
-    def __init__(self, nombre: str, tipos: str, stats: str) -> None:
+    def __init__(self, nombre: str, tipos: str, stats: str, nivel: int) -> None:
         self.nombre = nombre
+        self.nivel = nivel
         self.tipos = tipos
-        self.vida = stats['vida']
-        self.ataque = stats['ataque']
-        self.defensa = stats['defensa']
-        self.velocidad = stats['velocidad']
-        self.especial = stats['especial']
+        self.vida = self.calcular_stats(stats,'vida')
+        self.ataque = self.calcular_stats(stats,'ataque')
+        self.defensa = self.calcular_stats(stats,'defensa')
+        self.velocidad = self.calcular_stats(stats,'velocidad')
+        self.especial = self.calcular_stats(stats,'especial')
         self.ataques = {}
 
     def agregar_ataque(self, nombre: str, tipo: str, poder: int):
@@ -30,10 +31,29 @@ class Pokemon:
         return self.ataques.get(nombre_ataque)
 
     def recibir_ataque(self, ataque: Ataque):
-        self.comparar_tipo_defensor(ataque)
+        # daño = self.calcular_daño_total(self.comparar_tipo_defensor(ataque), self.variacion, self.nivel, 
+        # self.comparar_tipo_ataque(ataque), ataque.poder, self.comparar_tipo_ataque(ataque))
         self.vida -= ataque.poder
+        # self.vida -= daño
         if self.vida < 0:
             self.vida = 0
+    """
+    Estadísticas por nivel
+    PS: 10 + { Nivel / 100 x [ (Stat Base x 2) + IV + PE ] } + Nivel
+    Resto de las estadísticas: ( 5 + { Nivel / 100 x [ (Stat Base x 2) + IV + PE ] } ) x Naturaleza
+    Vamos a Obviar IVs, EVs (PE) y Naturaleza por el momento
+    PS = 10 + (Nivel / 100 * (base_vida * 2)) + Nivel
+    Resto_stats = 5 + (Nivel / 100 * (base_stat * 2)) x Naturaleza
+    """
+    def calcular_stats(self, stats:str, nombre_stat: str):
+        if nombre_stat == 'vida':
+            stat = 10 + (self.nivel / 100 * (stats[nombre_stat] * 2)) + self.nivel
+        else:
+            stat = 5 + (self.nivel / 100 * (stats[nombre_stat] * 2))
+        stat = round(stat)
+        print(f"La cantidad de {nombre_stat}, es de {stat} puntos")
+        return stat
+
     """
     Introducimos la comparación de tipos entre Pokemon y Ataque para posteriormente
     calcular la Fórmula del daño directo, que será algo como esto:
@@ -57,12 +77,7 @@ class Pokemon:
     ataques_fisicos = ["Bicho", "Fantasma", "Lucha", "Normal", "Roca", "Tierra", "Veneno", "Volador"]
     ataques_especiales = ["Agua", "Dragón", "Eléctrico", "Fuego", "Hielo", "Planta", "Psíquico"]
     """
-    def calcular_daño_total (bonificacion, efectividad, variacion, nivel, clase_ataque, poder_ataque, clase_defensa):
-        P1 = 0.01 * bonificacion * efectividad * variacion
-        P2 = 0.2 * (nivel + 1) * clase_ataque * poder_ataque
-        P3 = 25 / clase_defensa
-        daño_total = P1 * (P2 / P3 + 2)
-        return daño_total
+    
 
     # P1 (Primera parte de la Fórmula del daño directo)
     # P1 = 0.01 * bonificacion * efectividad * variacion
@@ -123,6 +138,13 @@ class Pokemon:
     # P3 = 25 / tipo_Defensa
     # Sera Defensa / Especial según el tipo de Ataque, se debería implentar en comparar_tipo_ataque()
 
+    def calcular_daño_total (bonificacion, efectividad, variacion, nivel, clase_ataque, poder_ataque, clase_defensa):
+        p1 = 0.01 * bonificacion * efectividad * variacion
+        p2 = 0.2 * (nivel + 1) * clase_ataque * poder_ataque
+        p3 = 25 / clase_defensa
+        daño_total = p1 * (p2 / p3 + 2)
+        return daño_total
+
 # Clase Combate donde se desarrolla el juego
 # Se eligen los Pokemon de Jugador y Oponente y sus turnos
 class Combate:
@@ -163,7 +185,16 @@ class Combate:
             try:
                 elegir_pokemon_oponente = int(input("Elige un pokemon para tu oponente. Del 1 al 151.\n"))
                 if 1 <= elegir_pokemon_oponente <= 151:
-                    break  # Salir del bucle si el número es válido
+                    try:
+                        elegir_nivel_oponente = int(input("Elige un nivel para tu oponente. Del 1 al 100.\n"))
+                        if 1 <= elegir_nivel_oponente <= 100:
+                            nivel_oponente = elegir_nivel_oponente
+                            break
+                        else:
+                            print("¡Número fuera de rango! Elige un número entre 1 y 100.")
+                    except ValueError:
+                        # Si el usuario introduce algo que no es un número
+                        print("¡Por favor ingresa un número válido entre 1 y 100.")
                 else:
                     print("¡Número fuera de rango! Elige un número entre 1 y 151.")
             except ValueError:
@@ -177,7 +208,7 @@ class Combate:
         module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_oponente}", fromlist=[pokedex_oponente])
         # Acceder a la clase dentro del módulo importado
         poke_oponente = getattr(module, pokedex_oponente)
-        pokemon_oponente = Pokemon(poke_oponente["nombre"], poke_oponente["tipos"], poke_oponente["stats"])
+        pokemon_oponente = Pokemon(poke_oponente["nombre"], poke_oponente["tipos"], poke_oponente["stats"], nivel_oponente)
 
         # Recorrer el array de ataques del Oponente
         for ataque_nombre in poke_oponente["ataques"]:
@@ -193,7 +224,16 @@ class Combate:
             try:
                 elegir_pokemon_jugador = int(input("¡Muy bien!, ahora elige tu Pokemon. Del 1 al 151.\n"))
                 if 1 <= elegir_pokemon_jugador <= 151:
-                    break  # Salir del bucle si el número es válido
+                    try:
+                        elegir_nivel_jugador = int(input("Elige un nivel para tu Pokemon. Del 1 al 100.\n"))
+                        if 1 <= elegir_nivel_jugador <= 100:
+                            nivel_jugador = elegir_nivel_jugador
+                            break
+                        else:
+                            print("¡Número fuera de rango! Elige un número entre 1 y 100.")
+                    except ValueError:
+                        # Si el usuario introduce algo que no es un número
+                        print("¡Por favor ingresa un número válido entre 1 y 100.")
                 else:
                     print("¡Número fuera de rango! Elige un número entre 1 y 151.")
             except ValueError:
@@ -207,7 +247,7 @@ class Combate:
         module = __import__(f"Datos.Pokemon.Stats_base.{pokedex_jugador}", fromlist=[pokedex_jugador])
         # Acceder a la clase dentro del módulo importado
         poke_jugador = getattr(module, pokedex_jugador)
-        pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["tipos"], poke_jugador["stats"])
+        pokemon_jugador = Pokemon(poke_jugador["nombre"], poke_jugador["tipos"], poke_jugador["stats"], nivel_jugador)
 
         # Recorrer el array de ataques del Jugador
         for ataque_nombre in poke_jugador["ataques"]:
@@ -220,7 +260,7 @@ class Combate:
 
     # Explicación del juego, componentes y dinámica
     def jugar(self):
-        print(f"** COMBATE POKEMON -- {self.oponente.nombre} contra {self.jugador.nombre} **")
+        print(f"** COMBATE POKEMON -- {self.oponente.nombre} (Nivel {self.oponente.nivel}) contra {self.jugador.nombre} (Nivel {self.jugador.nivel})**")
         print(f"Te reto a un combate entre personajes Pokemon. Yo controlo a {self.oponente.nombre} y tú a {self.jugador.nombre}.")
         print("Combatimos mientras ambos tengamos vida.\n")
         input(self.pulsa_para_continuar)
@@ -251,4 +291,6 @@ combate.jugar()
 Propuesta de Siguientes Commits:
 - Terminar de Implementar los Tipos (Efectividad entre ellos)
 - Implementar los Efectos Especiales de los Ataques
+
+- CORREGIR EL MÉTODO calcular_daño_total()
 """
