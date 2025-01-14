@@ -1,17 +1,16 @@
-import random                       # Para el ataque del Pokemon Oponente (de momento)
+import random
 from Pokedex import pokedex         # Archivo donde están los Pokemon (id, nombre y tipos)
 from Datos.Ataques import ataques   # Archivo donde estarán todos los Ataques y sus características
 from Datos.Debilidades import debilidades   # Debilidades de cada Tipo
+from Datos.Efectos import efectos   # Archivo donde estarán los efectos especiales de los Ataques
 
-# Clase Ataque con los atributos nombre, tipo y poder
 class Ataque:
-    def __init__(self, nombre: str, tipo: str, poder: int) -> None:
+    def __init__(self, nombre: str) -> None:
         self.nombre = nombre
-        self.tipo = tipo
-        self.poder = poder
+        self.tipo = ataques[nombre]['tipo']
+        self.poder = ataques[nombre]['poder']
+        self.efecto = ataques[nombre]['efecto']
 
-# Clase Pokemon con los atributos nombre, stats y ataques
-# y los métodos para agregar, elegir y recibir ataques
 class Pokemon:
     def __init__(self, nombre: str, tipos: str, stats: str, nivel: int) -> None:
         self.nombre = nombre
@@ -24,8 +23,8 @@ class Pokemon:
         self.especial = self.calcular_stats(stats,'especial')
         self.ataques = {}
 
-    def agregar_ataque(self, nombre: str, tipo: str, poder: int):
-        self.ataques[nombre] = Ataque(nombre, tipo, poder)
+    def agregar_ataque(self, nombre: str):
+        self.ataques[nombre] = Ataque(nombre)
 
     def elegir_ataque(self, nombre_ataque: str):
         return self.ataques.get(nombre_ataque)
@@ -33,16 +32,30 @@ class Pokemon:
     def recibir_ataque(self, ataque: Ataque):
         daño = self.calcular_daño_total(self.comparar_tipo_atacante(ataque), self.comparar_tipo_defensor(ataque), 
         self.variacion, self.nivel, self.comparar_tipo_ataque_defensa(ataque), ataque.poder)
+        self.comprobar_efecto(ataque)
         self.vida -= daño
         if self.vida < 0:
             self.vida = 0
+
+    def comprobar_efecto(self, ataque: Ataque):
+        efecto = efectos[ataque.efecto]['efecto']
+        if  not efecto:
+            return
+        if efecto[0] == 'ataque':
+            print(f"El {efecto[0]} antes de {efecto[1]} era de {self.ataque}")
+            if efecto[1] == 'bajar':
+                self.ataque -= efecto[2]
+            elif efecto[1] == 'subir':
+                self.ataque += efecto[2]
+            else:
+                print(f"Algo falló")
+            print(f"El {efecto[0]} después de {efecto[1]} es de {self.ataque}")
+    
     """
     Estadísticas por nivel
-    PS: 10 + { Nivel / 100 x [ (Stat Base x 2) + IV + PE ] } + Nivel
-    Resto de las estadísticas: ( 5 + { Nivel / 100 x [ (Stat Base x 2) + IV + PE ] } ) x Naturaleza
-    Vamos a Obviar IVs, EVs (PE) y Naturaleza por el momento
+    Vamos a Obviar IVs, EVs y Naturaleza por el momento
     PS = 10 + (Nivel / 100 * (base_vida * 2)) + Nivel
-    Resto_stats = 5 + (Nivel / 100 * (base_stat * 2)) x Naturaleza
+    Resto_stats = 5 + (Nivel / 100 * (base_stat * 2))
     """
     def calcular_stats(self, stats:str, nombre_stat: str):
         if nombre_stat == 'vida':
@@ -54,10 +67,8 @@ class Pokemon:
         return stat
 
     """
-    Introducimos la comparación de tipos entre Pokemon y Ataque para posteriormente
-    calcular la Fórmula del daño directo, que será algo como esto:
-        
-    Daño = P1 * (P2 / P3 + 2)
+    Fórmula del daño directo:
+        Daño = P1 * (P2 / P3 + 2)
 
         P1 = 0.01 * $B * $E *V
         P2 = (0.2 * $N + 1) * $A * $P
@@ -76,7 +87,6 @@ class Pokemon:
     ataques_fisicos = ["Bicho", "Fantasma", "Lucha", "Normal", "Roca", "Tierra", "Veneno", "Volador"]
     ataques_especiales = ["Agua", "Dragón", "Eléctrico", "Fuego", "Hielo", "Planta", "Psíquico"]
     """
-    
 
     # P1 (Primera parte de la Fórmula del daño directo)
     # P1 = 0.01 * bonificacion * efectividad * variacion
@@ -99,16 +109,16 @@ class Pokemon:
     def comparar_tipo_defensor(self, ataque: Ataque):
         print(f"{self.nombre} (tipo {self.tipos[0]}), recibe el ataque {ataque.nombre} que es de tipo {ataque.tipo}.")
         if ataque.tipo in debilidades[self.tipos[0]]["débil"] :
-            print(f"Es muy efectivo. El daño es * 2")
+            print(f"Es muy efectivo. El daño es (x2)")
             efectividad = 2
         elif ataque.tipo in debilidades[self.tipos[0]]["resistente"] :
-            print(f"No es muy efectivo. El daño es * 0,5")
+            print(f"No es muy efectivo. El daño es (x 0,5)")
             efectividad = 0.5
         elif ataque.tipo in debilidades[self.tipos[0]]["inmune"] :
-            print(f"No afecta. El daño es * 0")
+            print(f"No afecta. El daño es 0")
             efectividad = 0
         else: 
-            print(f"El daño es normal * 1")
+            print(f"El daño es normal  (x1)")
             efectividad = 1
         return efectividad
     
@@ -119,6 +129,7 @@ class Pokemon:
 
     # P2 (Segunda parte de la Fórmula del daño directo)
     # P2 = (0.02 * nivel + 1) * clase_Ataque * Poder_ataque
+    # Será Ataque / Especial según el tipo de Ataque
     # P3 (Tercera parte de la Fórmula del daño directo)
     # P3 = 25 * tipo_Defensa
     # Será Defensa / Especial según el tipo de Ataque
@@ -148,13 +159,6 @@ class Pokemon:
             p3 = round(p3)
             daño_total = p1 * (p2 / p3 + 2)
             daño_total = round(daño_total)
-            """
-            print(f"Daño Total = p1 * (p2 / p3 + 2)")
-            print(f"p1 = 0.01 * bonificacion ({bonificacion}) * efectividad ({efectividad}) * variacion ({variacion}).")
-            print(f"p2 = p2 = 0.2 * (nivel ({nivel}) + 1) * clase_ataque ({clase_ataque_defensa[0]}) * poder_ataque ({poder_ataque}).")
-            print(f"p3 = 25 * clase_defensa ({clase_ataque_defensa[1]}).")
-            print(f"Daño Total = {p1} * ({p2} / {p3} + 2) = {daño_total}")
-            """
             print(f"Daño Total = {p1} * ({p2} / {p3} + 2) = {daño_total}")
         return daño_total
 
@@ -168,8 +172,7 @@ class Combate:
 
     def turno_atacar_oponente(self):
         ataque_oponente = random.choice(list(self.oponente.ataques.values()))
-        #print(f"{self.oponente.nombre} usa {ataque_oponente.nombre} y causa {ataque_oponente.poder} puntos de daño.")
-        print(f"{self.oponente.nombre} ataca.")
+        print(f"El {self.oponente.nombre} enemigo ataca.")
         self.jugador.recibir_ataque(ataque_oponente)
         print(f"Te quedan {self.jugador.vida} puntos de vida.")
 
@@ -180,17 +183,18 @@ class Combate:
         # Usando enumerate para obtener tanto el índice como el nombre del ataque
         for index, ataque in enumerate(ataques_posibles):
             mensaje_ataques += f"{index+1}- {ataque.nombre}\n"
-
-        elegir_ataque = int(input(mensaje_ataques + "Tu opción --> "))        
-
-        if 1 <= elegir_ataque <= len(ataques_posibles):
-            ataque_jugador = ataques_posibles[elegir_ataque - 1]
-            #print(f"¡Lanzas un ataque {ataque_jugador.nombre} y causas {ataque_jugador.poder} puntos de daño a {self.oponente.nombre}!.")
-            print(f"Tu {self.jugador.nombre} ataca.")
-            self.oponente.recibir_ataque(ataque_jugador)
-            print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
-        else:
-            print("¡Has perdido el turno! No elegiste un ataque válido.")
+        while True:
+            try:
+                elegir_ataque = int(input(mensaje_ataques + "Tu opción --> "))        
+                if 1 <= elegir_ataque <= len(ataques_posibles):
+                    ataque_jugador = ataques_posibles[elegir_ataque - 1]
+                    print(f"Tu {self.jugador.nombre} ataca.")
+                    self.oponente.recibir_ataque(ataque_jugador)
+                    print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
+                    break
+            except ValueError:
+                # Si el usuario introduce algo que no es un número válido
+                print(f"¡Por favor ingresa un número válido entre 1 y {len(ataques_posibles)}")
 
     # Elegimos los Pokemon del Oponente y del Jugador desde la Pokedex eligiendo un número del 1 al 151
     def elegir_pokemon_oponente():
@@ -225,10 +229,8 @@ class Combate:
 
         # Recorrer el array de ataques del Oponente
         for ataque_nombre in poke_oponente["ataques"]:
-            # Obtener los detalles del ataque desde el diccionario `ataques`
             ataque = ataques[ataque_nombre]
-            # Llamar al método agregar_ataque con el nombre, tipo y poder del ataque
-            pokemon_oponente.agregar_ataque(ataque["nombre"], ataque["tipo"], ataque["poder"])
+            pokemon_oponente.agregar_ataque(ataque["nombre"])
         
         return pokemon_oponente
     
@@ -264,21 +266,22 @@ class Combate:
 
         # Recorrer el array de ataques del Jugador
         for ataque_nombre in poke_jugador["ataques"]:
-            # Obtener los detalles del ataque desde el diccionario `ataques`
             ataque = ataques[ataque_nombre]
-            # Llamar al método agregar_ataque con el nombre, tipo y poder del ataque
-            pokemon_jugador.agregar_ataque(ataque["nombre"], ataque["tipo"], ataque["poder"])
+            pokemon_jugador.agregar_ataque(ataque["nombre"])
         
         return pokemon_jugador
 
     # Explicación del juego, componentes y dinámica
     def jugar(self):
-        print(f"** COMBATE POKEMON -- {self.oponente.nombre} (Nivel {self.oponente.nivel}) contra {self.jugador.nombre} (Nivel {self.jugador.nivel})**")
+        print("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n")
+        print(f"** COMBATE POKEMON -- {self.oponente.nombre} (Nivel {self.oponente.nivel}) contra {self.jugador.nombre} (Nivel {self.jugador.nivel}) **")
         print(f"Te reto a un combate entre personajes Pokemon. Yo controlo a {self.oponente.nombre} y tú a {self.jugador.nombre}.")
         print("Combatimos mientras ambos tengamos vida.\n")
+        print("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n")
         input(self.pulsa_para_continuar)
         # Empezará atacando el oponente.
         while self.jugador.vida > 0 and self.oponente.vida > 0:
+            print("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n")
             self.turno_atacar_oponente()
             if self.jugador.vida == 0:
                 break
@@ -287,6 +290,7 @@ class Combate:
             if self.oponente.vida == 0:
                 break
             input(self.pulsa_para_continuar)
+            print("-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_\n")
             print("\nResumen del combate:")
             print(f"Te quedan {self.jugador.vida} puntos de vida.")
             print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
