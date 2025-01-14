@@ -31,10 +31,9 @@ class Pokemon:
         return self.ataques.get(nombre_ataque)
 
     def recibir_ataque(self, ataque: Ataque):
-        # daño = self.calcular_daño_total(self.comparar_tipo_defensor(ataque), self.variacion, self.nivel, 
-        # self.comparar_tipo_ataque(ataque), ataque.poder, self.comparar_tipo_ataque(ataque))
-        self.vida -= ataque.poder
-        # self.vida -= daño
+        daño = self.calcular_daño_total(self.comparar_tipo_atacante(ataque), self.comparar_tipo_defensor(ataque), 
+        self.variacion, self.nivel, self.comparar_tipo_ataque_defensa(ataque), ataque.poder)
+        self.vida -= daño
         if self.vida < 0:
             self.vida = 0
     """
@@ -62,7 +61,7 @@ class Pokemon:
 
         P1 = 0.01 * $B * $E *V
         P2 = (0.2 * $N + 1) * $A * $P
-        P3 = 25 / $D
+        P3 = 25 * $D
 
         $B = Bonificación
         $E = Efectividad
@@ -86,11 +85,11 @@ class Pokemon:
     # Bonificación: si el ataque es del mismo tipo que el Pokemon que lo lanza toma un valor de 1,5
     # si el ataque es de un tipo diferente que el Pokemon que lo lanza toma un valor de 1.
     def comparar_tipo_atacante(self, ataque: Ataque):
+        #print(f"{self.nombre} (tipo {self.tipos[0]}), realiza el ataque {ataque.nombre} que es de tipo {ataque.tipo}.")
+        print(f"realiza el ataque {ataque.nombre} que es de tipo {ataque.tipo}.")
         if self.tipos[0] == ataque.tipo :
-            print(f"{self.nombre}, que realiza el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
             bonificacion = 1.5
         else:
-            print(f"{self.nombre}, que realiza el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
             bonificacion = 1
         return bonificacion
 
@@ -98,11 +97,7 @@ class Pokemon:
     # Efectividad que podrá tener los valores 0, 0.5, 1 y 2.
     # en función de la Relación entre Tipos (Archivo Debilidades)
     def comparar_tipo_defensor(self, ataque: Ataque):
-        if ataque.tipo == self.tipos[0] :
-            print(f"{self.nombre}, que recibe el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
-        else:
-            print(f"{self.nombre}, que recibe el ataque es de tipo {self.tipos[0]}; {ataque.nombre} es de tipo {ataque.tipo}.")
-
+        print(f"{self.nombre} (tipo {self.tipos[0]}), recibe el ataque {ataque.nombre} que es de tipo {ataque.tipo}.")
         if ataque.tipo in debilidades[self.tipos[0]]["débil"] :
             print(f"Es muy efectivo. El daño es * 2")
             efectividad = 2
@@ -123,26 +118,44 @@ class Pokemon:
     print(f"El Número de Variación ha sido {variacion}.")
 
     # P2 (Segunda parte de la Fórmula del daño directo)
-    # P2 = (0.2 * nivel + 1) * clase_Ataque * Poder_ataque
-    def comparar_tipo_ataque(self, ataque: Ataque):
+    # P2 = (0.02 * nivel + 1) * clase_Ataque * Poder_ataque
+    # P3 (Tercera parte de la Fórmula del daño directo)
+    # P3 = 25 * tipo_Defensa
+    # Será Defensa / Especial según el tipo de Ataque
+    def comparar_tipo_ataque_defensa(self, ataque: Ataque):
         ataques_fisicos = ["Bicho", "Fantasma", "Lucha", "Normal", "Roca", "Tierra", "Veneno", "Volador"]
         if ataque.tipo in ataques_fisicos:
-            clase_ataque = "Físico"
-            print(f"{self.nombre}, realiza un ataque es de clase {clase_ataque}, ya que es de tipo {ataque.tipo}.")
+            clase_stats = "Físicas (Ataque/Defensa)"
+            clase_ataque = self.ataque
+            clase_defensa = self.defensa
         else:
         # ataques_especiales = ["Agua", "Dragón", "Eléctrico", "Fuego", "Hielo", "Planta", "Psíquico"]
-            clase_ataque = "Especial"
-            print(f"{self.nombre}, realiza un ataque es de clase {clase_ataque}, ya que es de tipo {ataque.tipo}.")
-        return clase_ataque
-    # P3 (Tercera parte de la Fórmula del daño directo)
-    # P3 = 25 / tipo_Defensa
-    # Sera Defensa / Especial según el tipo de Ataque, se debería implentar en comparar_tipo_ataque()
+            clase_stats = "Especiales (Especial)"
+            clase_ataque = self.especial
+            clase_defensa = self.especial
+        print(f"Se utilizan las stats {clase_stats}, ya que {ataque.nombre} es de tipo {ataque.tipo}.")
+        return clase_ataque, clase_defensa
 
-    def calcular_daño_total (bonificacion, efectividad, variacion, nivel, clase_ataque, poder_ataque, clase_defensa):
-        p1 = 0.01 * bonificacion * efectividad * variacion
-        p2 = 0.2 * (nivel + 1) * clase_ataque * poder_ataque
-        p3 = 25 / clase_defensa
-        daño_total = p1 * (p2 / p3 + 2)
+    def calcular_daño_total (self, bonificacion, efectividad, variacion, nivel, clase_ataque_defensa, poder_ataque):
+        if poder_ataque == 0:
+            daño_total = 0
+        else: 
+            p1 = 0.01 * bonificacion * efectividad * variacion
+            p1 = round(p1)
+            p2 = 0.2 * (nivel + 1) * clase_ataque_defensa[0] * poder_ataque
+            p2 = round(p2) 
+            p3 = 25 * clase_ataque_defensa[1]
+            p3 = round(p3)
+            daño_total = p1 * (p2 / p3 + 2)
+            daño_total = round(daño_total)
+            """
+            print(f"Daño Total = p1 * (p2 / p3 + 2)")
+            print(f"p1 = 0.01 * bonificacion ({bonificacion}) * efectividad ({efectividad}) * variacion ({variacion}).")
+            print(f"p2 = p2 = 0.2 * (nivel ({nivel}) + 1) * clase_ataque ({clase_ataque_defensa[0]}) * poder_ataque ({poder_ataque}).")
+            print(f"p3 = 25 * clase_defensa ({clase_ataque_defensa[1]}).")
+            print(f"Daño Total = {p1} * ({p2} / {p3} + 2) = {daño_total}")
+            """
+            print(f"Daño Total = {p1} * ({p2} / {p3} + 2) = {daño_total}")
         return daño_total
 
 # Clase Combate donde se desarrolla el juego
@@ -155,8 +168,8 @@ class Combate:
 
     def turno_atacar_oponente(self):
         ataque_oponente = random.choice(list(self.oponente.ataques.values()))
-        self.oponente.comparar_tipo_atacante(ataque_oponente)
-        print(f"{self.oponente.nombre} usa {ataque_oponente.nombre} y causa {ataque_oponente.poder} puntos de daño.")
+        #print(f"{self.oponente.nombre} usa {ataque_oponente.nombre} y causa {ataque_oponente.poder} puntos de daño.")
+        print(f"{self.oponente.nombre} ataca.")
         self.jugador.recibir_ataque(ataque_oponente)
         print(f"Te quedan {self.jugador.vida} puntos de vida.")
 
@@ -172,8 +185,8 @@ class Combate:
 
         if 1 <= elegir_ataque <= len(ataques_posibles):
             ataque_jugador = ataques_posibles[elegir_ataque - 1]
-            self.jugador.comparar_tipo_atacante(ataque_jugador)
-            print(f"¡Lanzas un ataque {ataque_jugador.nombre} y causas {ataque_jugador.poder} puntos de daño a {self.oponente.nombre}!.")
+            #print(f"¡Lanzas un ataque {ataque_jugador.nombre} y causas {ataque_jugador.poder} puntos de daño a {self.oponente.nombre}!.")
+            print(f"Tu {self.jugador.nombre} ataca.")
             self.oponente.recibir_ataque(ataque_jugador)
             print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
         else:
@@ -289,8 +302,5 @@ combate.jugar()
 
 """
 Propuesta de Siguientes Commits:
-- Terminar de Implementar los Tipos (Efectividad entre ellos)
 - Implementar los Efectos Especiales de los Ataques
-
-- CORREGIR EL MÉTODO calcular_daño_total()
 """
