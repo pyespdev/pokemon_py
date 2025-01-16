@@ -19,5 +19,12 @@ ataques = {
              "precision": 100,
              "pp": 35,
              "efecto": "SIN_EFECTO_ADICIONAL"
+             },
+    "LátigoPrueba": {"nombre": "LátigoPrueba", 
+             "tipo": "Normal",
+             "poder": 40,
+             "precision": 100,
+             "pp": 35,
+             "efecto": "DEFENSA_BAJA1_EFECTO"
              }
 }

@@ -39,18 +39,28 @@ class Pokemon:
 
     def comprobar_efecto(self, ataque: Ataque):
         efecto = efectos[ataque.efecto]['efecto']
-        if  not efecto:
+        if not efecto:
             return
-        if efecto[0] == 'ataque':
-            print(f"El {efecto[0]} antes de {efecto[1]} era de {self.ataque}")
+        # Comprobar si el atributo corresponde a uno de los posibles y es válido
+        atributo = efecto[0]  # Puede ser 'ataque', 'defensa', 'velocidad', o 'especial'
+        # Verificar si el atributo existe en la clase y es válido
+        if hasattr(self, atributo):
+            valor_atributo = getattr(self, atributo)  # Obtener el valor actual del atributo dinámicamente
+            print(f"El atributo {atributo} antes de {efecto[1]} era de {valor_atributo}")
             if efecto[1] == 'bajar':
-                self.ataque -= efecto[2]
+                nuevo_valor = valor_atributo - efecto[2]
+                setattr(self, atributo, nuevo_valor)  # Asignar el nuevo valor al atributo
             elif efecto[1] == 'subir':
-                self.ataque += efecto[2]
+                nuevo_valor = valor_atributo + efecto[2]
+                setattr(self, atributo, nuevo_valor)  # Asignar el nuevo valor al atributo
             else:
-                print(f"Algo falló")
-            print(f"El {efecto[0]} después de {efecto[1]} es de {self.ataque}")
-    
+                print(f"Algo falló en la operación para {atributo}")
+            # Imprimir el nuevo valor del atributo
+            valor_actualizado = getattr(self, atributo)
+            print(f"El atributo {atributo} después de {efecto[1]} es de {valor_actualizado}")
+        else:
+            print(f"El atributo {atributo} no existe en esta clase.")
+
     """
     Estadísticas por nivel
     Vamos a Obviar IVs, EVs y Naturaleza por el momento
@@ -63,7 +73,7 @@ class Pokemon:
         else:
             stat = 5 + (self.nivel / 100 * (stats[nombre_stat] * 2))
         stat = round(stat)
-        print(f"La cantidad de {nombre_stat}, es de {stat} puntos")
+        print(f"La cantidad de {nombre_stat} de {self.nombre}, es de {stat} puntos")
         return stat
 
     """

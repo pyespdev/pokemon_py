@@ -6,5 +6,9 @@ efectos = {
     "ATAQUE_BAJA1_EFECTO": {
         "nombre": "ATAQUE_BAJA1_EFECTO",
         "efecto": ["ataque", "bajar", 1]
+    },
+    "DEFENSA_BAJA1_EFECTO": {
+        "nombre": "DEFENSA_BAJA1_EFECTO",
+        "efecto": ["defensa", "bajar", 1]
     }
 }
