@@ -183,7 +183,12 @@ class Combate:
     def turno_atacar_oponente(self):
         ataque_oponente = random.choice(list(self.oponente.ataques.values()))
         print(f"El {self.oponente.nombre} enemigo ataca.")
-        self.jugador.recibir_ataque(ataque_oponente)
+        efecto_ataque = efectos[ataque_oponente.efecto]['efecto_ataque']
+        if efecto_ataque[0]:
+            print("EL EFECTO ES PARA EL POKEMON QUE ATACA (NO IMPLEMENTADO)")
+            #self.oponente.recibir_ataque(ataque_oponente)
+        else:
+            self.jugador.recibir_ataque(ataque_oponente)
         print(f"Te quedan {self.jugador.vida} puntos de vida.")
 
     def turno_atacar_jugador(self):

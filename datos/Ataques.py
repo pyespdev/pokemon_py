@@ -26,5 +26,12 @@ ataques = {
              "precision": 100,
              "pp": 35,
              "efecto": "DEFENSA_BAJA1_EFECTO"
+             },
+    "MejoraPrueba": {"nombre": "MejoraPrueba", 
+             "tipo": "Normal",
+             "poder": 0,
+             "precision": 100,
+             "pp": 10,
+             "efecto": "ATAQUE_SUBE2_EFECTO"
              }
 }

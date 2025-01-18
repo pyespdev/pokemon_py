@@ -9,5 +9,5 @@ Charmander = {
         "velocidad": 65,
         "especial": 50
     },
-    "ataques": ["Arañazo", "Gruñido","LátigoPrueba"],
+    "ataques": ["Arañazo", "Gruñido","LátigoPrueba","MejoraPrueba"],
 }

@@ -30,6 +30,9 @@ efectos = {
     "ATAQUE_DEFENSA_SUBE1_EFECTO": {
     },
     "ATAQUE_SUBE2_EFECTO": {
+        "nombre": "ATAQUE_SUBE2_EFECTO",
+        "efecto": ["ataque", "subir", 2],
+        "efecto_ataque": ["ataque", "subir", 1]
     },
     "ATAQUE_DEFENSA_SUBE1_EFECTO": {
     }
