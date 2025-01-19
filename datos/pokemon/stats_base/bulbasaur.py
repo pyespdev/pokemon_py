@@ -9,5 +9,5 @@ Bulbasaur = {
         "velocidad": 45,
         "especial": 65
     },
-    "ataques": ["Placaje", "Gruñido"],
+    "ataques": ["Placaje", "Gruñido","LátigoPrueba"],
 }
