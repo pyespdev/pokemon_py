@@ -183,9 +183,9 @@ class Combate:
     def turno_atacar_oponente(self):
         ataque_oponente = random.choice(list(self.oponente.ataques.values()))
         print(f"El {self.oponente.nombre} enemigo ataca.")
-        if 'efecto_ataque' in efectos[ataque_oponente.efecto] and efectos[ataque_oponente.efecto]['efecto_ataque'][0]:
-            print("EL EFECTO ES PARA EL POKEMON QUE ATACA (NO IMPLEMENTADO)")
-            #self.oponente.recibir_ataque(ataque_oponente)
+        if 'mejora_propia' in efectos[ataque_oponente.efecto]:
+            #print("EL EFECTO ES PARA EL POKEMON QUE ATACA (NO IMPLEMENTADO)")
+            self.oponente.recibir_ataque(ataque_oponente)
         else:
             self.jugador.recibir_ataque(ataque_oponente)
         print(f"Te quedan {self.jugador.vida} puntos de vida.")
@@ -203,9 +203,9 @@ class Combate:
                 if 1 <= elegir_ataque <= len(ataques_posibles):
                     ataque_jugador = ataques_posibles[elegir_ataque - 1]
                     print(f"Tu {self.jugador.nombre} ataca.")
-                    if 'efecto_ataque' in efectos[ataque_jugador.efecto] and efectos[ataque_jugador.efecto]['efecto_ataque'][0]:
-                        print("EL EFECTO ES PARA EL POKEMON QUE ATACA (NO IMPLEMENTADO)")
-                        #self.jugador.recibir_ataque(ataque_jugador)
+                    if 'mejora_propia' in efectos[ataque_jugador.efecto]:
+                        #print("EL EFECTO ES PARA EL POKEMON QUE ATACA (NO IMPLEMENTADO)")
+                        self.jugador.recibir_ataque(ataque_jugador)
                     else:
                         self.oponente.recibir_ataque(ataque_jugador)
                         print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
