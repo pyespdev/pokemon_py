@@ -21,6 +21,7 @@ class Pokemon:
         self.defensa = self.calcular_stats(stats,'defensa')
         self.velocidad = self.calcular_stats(stats,'velocidad')
         self.especial = self.calcular_stats(stats,'especial')
+        self.evasion = 100
         self.ataques = {}
 
     def agregar_ataque(self, nombre: str):
