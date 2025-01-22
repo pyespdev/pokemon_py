@@ -10,6 +10,7 @@ class Ataque:
         self.tipo = ataques[nombre]['tipo']
         self.poder = ataques[nombre]['poder']
         self.efecto = ataques[nombre]['efecto']
+        self.precision = ataques[nombre]['precision']
 
 class Pokemon:
     def __init__(self, nombre: str, tipos: str, stats: str, nivel: int) -> None:
@@ -27,6 +28,16 @@ class Pokemon:
     def agregar_ataque(self, nombre: str):
         self.ataques[nombre] = Ataque(nombre)
 
+    def comprobar_precision(self, ataque: Ataque):
+        precision = ataque.precision
+        aleatorio = random.randint(1,100)
+        print(f"La precisión del Ataque {ataque.nombre} es de {ataque.precision}")
+        print(f"El número aleatorio es {aleatorio}")
+        if aleatorio > precision:
+            print(f"El número aleatorio {aleatorio} es mayor que {ataque.precision}, la precisión del Ataque {ataque.nombre}")
+        else:
+            print(f"la precisión del Ataque {ataque.nombre} ({ataque.precision}), es mayor que el número aleatorio {aleatorio}")
+    
     def elegir_ataque(self, nombre_ataque: str):
         return self.ataques.get(nombre_ataque)
 
@@ -184,12 +195,15 @@ class Combate:
     def turno_atacar_oponente(self):
         ataque_oponente = random.choice(list(self.oponente.ataques.values()))
         print(f"El {self.oponente.nombre} enemigo ataca.")
-        if 'mejora_propia' in efectos[ataque_oponente.efecto]:
-            #print("EL EFECTO ES PARA EL POKEMON QUE ATACA (NO IMPLEMENTADO)")
-            self.oponente.recibir_ataque(ataque_oponente)
+        if self.oponente.comprobar_precision(ataque_oponente):
+            print(f"PRUEBA")
         else:
-            self.jugador.recibir_ataque(ataque_oponente)
-        print(f"Te quedan {self.jugador.vida} puntos de vida.")
+            if 'mejora_propia' in efectos[ataque_oponente.efecto]:
+                #print("EL EFECTO ES PARA EL POKEMON QUE ATACA (NO IMPLEMENTADO)")
+                self.oponente.recibir_ataque(ataque_oponente)
+            else:
+                self.jugador.recibir_ataque(ataque_oponente)
+            print(f"Te quedan {self.jugador.vida} puntos de vida.")
 
     def turno_atacar_jugador(self):
         print("\nAhora es tu turno para atacar. Puedes elegir entre los ataques que tienes disponibles.")
@@ -204,13 +218,16 @@ class Combate:
                 if 1 <= elegir_ataque <= len(ataques_posibles):
                     ataque_jugador = ataques_posibles[elegir_ataque - 1]
                     print(f"Tu {self.jugador.nombre} ataca.")
-                    if 'mejora_propia' in efectos[ataque_jugador.efecto]:
-                        #print("EL EFECTO ES PARA EL POKEMON QUE ATACA (NO IMPLEMENTADO)")
-                        self.jugador.recibir_ataque(ataque_jugador)
+                    if self.jugador.comprobar_precision(ataque_jugador):
+                        print(f"PRUEBA")
                     else:
-                        self.oponente.recibir_ataque(ataque_jugador)
-                        print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
-                    break
+                        if 'mejora_propia' in efectos[ataque_jugador.efecto]:
+                            #print("EL EFECTO ES PARA EL POKEMON QUE ATACA (NO IMPLEMENTADO)")
+                            self.jugador.recibir_ataque(ataque_jugador)
+                        else:
+                            self.oponente.recibir_ataque(ataque_jugador)
+                            print(f"A {self.oponente.nombre} le quedan {self.oponente.vida} puntos de vida.")
+                        break
             except ValueError:
                 # Si el usuario introduce algo que no es un número válido
                 print(f"¡Por favor ingresa un número válido entre 1 y {len(ataques_posibles)}")
