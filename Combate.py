@@ -342,5 +342,5 @@ combate.jugar()
 
 """
 Propuesta de Siguientes Commits:
-- Implementar los Efectos Especiales de los Ataques
+- FALSO COMMIT
 """
