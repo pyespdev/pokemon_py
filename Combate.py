@@ -342,5 +342,5 @@ combate.jugar()
 
 """
 Propuesta de Siguientes Commits:
-- FALSO COMMIT ANGELA
+- Semana Intensa
 """
