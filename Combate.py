@@ -342,5 +342,5 @@ combate.jugar()
 
 """
 Propuesta de Siguientes Commits:
-- Semana Intensa
+- Commit Granada 1
 """
