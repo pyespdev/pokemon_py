@@ -32,6 +32,6 @@ ataques = {
              "poder": 0,
              "precision": 100,
              "pp": 10,
-             "efecto": "ATAQUE_SUBE2_EFECTO"
+             "efecto": "CURAR"
              }
 }

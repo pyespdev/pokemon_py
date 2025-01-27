@@ -17,13 +17,12 @@ efectos = {
     },
     "PRECISION_BAJA1_EFECTO": {
         "nombre": "PRECISION_BAJA1_EFECTO",
-        "efecto": [],
-        "efecto_ataque": ["precision", "bajar", 1]
+        "efecto": ["precision", "bajar", 1]
     },
     "PRECISION_SUBE1_EFECTO": {
         "nombre": "PRECISION_SUBE1_EFECTO",
-        "efecto": [],
-        "efecto_ataque": ["precision", "subir", 1]
+        "efecto": ["precision", "subir", 1],
+        "mejora_propia": ["PRECISION_SUBE1_EFECTO"]
     },
     "ATAQUE_PRECISION_SUBE1_EFECTO": {
     },
@@ -32,15 +31,18 @@ efectos = {
     "ATAQUE_SUBE2_EFECTO": {
         "nombre": "ATAQUE_SUBE2_EFECTO",
         "efecto": ["ataque", "subir", 2],
-        "efecto_ataque": ["ataque", "subir", 1]
+        "mejora_propia": ["ATAQUE_SUBE2_EFECTO"]
     },
-    "ATAQUE_DEFENSA_SUBE1_EFECTO": {
+    "CURAR": {
+        "nombre": "CURAR",
+        "efecto": ["vida", "subir", 10],
+        "mejora_propia": ["CURAR"]
     }
+    
 }
 
-# Se debería indicar si afecta al usuario o al oponente
-# con un atributo "objetivo" por ejemplo
-# no se si aquí o en Ataques.py
+# Se indica si afecta al atacante
+# si el atributo "mejora_propia" existe
 
 # Se deberían introducir las características de:
 #  "precision" -> Ataques
