@@ -342,5 +342,5 @@ combate.jugar()
 
 """
 Propuesta de Siguientes Commits:
-- Commit Granada 7
+- Commit Granada 8
 """
