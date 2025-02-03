@@ -342,5 +342,5 @@ combate.jugar()
 
 """
 Propuesta de Siguientes Commits:
-- Commit Granada 8
+- Commit Vuelta a la normalidad
 """
