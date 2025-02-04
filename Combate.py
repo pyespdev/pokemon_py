@@ -342,5 +342,18 @@ combate.jugar()
 
 """
 Propuesta de Siguientes Commits:
-- Commit Vuelta a la normalidad
+- Consultar Pygame y diferentes videos de Youtube para decidir como seguir adelante.
+    Por ejemplo:
+
+    · Creating a Pokémon inspired RPG in Python & Pygame
+    https://www.youtube.com/watch?v=fo4e3njyGy0
+
+    · Python Pokemon - Python Class Tutorial for Beginners
+    https://www.youtube.com/watch?v=Pbs6jQZrZA4
+
+    [ESPAÑOL] Identico al anterior
+    · Curso Python Pokemon (¡FÁCIL!) - Python Clases y Objetos
+    https://www.youtube.com/watch?v=tRo-RhXd1LI
+
+    https://whackahack.com/foro/threads/crear-un-juego-de-pokemon-para-torpes-by-ericlostie.66429/
 """
