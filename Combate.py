@@ -356,5 +356,5 @@ Propuesta de Siguientes Commits:
     https://www.youtube.com/watch?v=tRo-RhXd1LI
 
     https://whackahack.com/foro/threads/crear-un-juego-de-pokemon-para-torpes-by-ericlostie.66429/
-    One More Time
+    Ensamblador ASM
 """
