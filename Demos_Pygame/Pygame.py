@@ -50,13 +50,8 @@ while True:
     # Actualizar pantalla
     pygame.display.flip()
     clock.tick(60)
-
-
-
+    
 """
 Curso de pygame 2020: Creando una ventana y estructura de nuestro juego
 https://www.youtube.com/watch?v=xjAvXGT5z3E&list=PLuB3bC9rWQAu6cGeRo_I6QV8cz1_2V6uM
-
-Seguir Aquí
-https://www.youtube.com/watch?v=EN4ZlFRuD28&list=PLuB3bC9rWQAu6cGeRo_I6QV8cz1_2V6uM&index=8
 """
