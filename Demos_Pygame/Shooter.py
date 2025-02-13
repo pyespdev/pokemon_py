@@ -5,7 +5,6 @@ BLACK = (0, 0, 0)
 class Meteor(pygame.sprite.Sprite):
 	def __init__(self):
 		super().__init__()
-		#self.image = pygame.image.load("c:\Users\Carlos\StudioProjects\pyespdev\pokemon_py\Demos_Pygame\images\meteor.png").convert()
 		self.image = pygame.image.load("Demos_Pygame/images/meteor.png").convert()
 		self.image.set_colorkey(BLACK)
 		self.rect = self.image.get_rect()
@@ -16,10 +15,14 @@ class Player(pygame.sprite.Sprite):
 		self.image = pygame.image.load("Demos_Pygame/images/player.png").convert()
 		self.image.set_colorkey(BLACK)
 		self.rect = self.image.get_rect()
+		self.speed_x = 0
+		self.speed_y = 0
 
+	def changespeed(self, x):
+		self.speed_x += x
+	
 	def update(self):
-		mouse_pos = pygame.mouse.get_pos()
-		player.rect.x = mouse_pos[0]
+		self.rect.x += self.speed_x
 		player.rect.y = 510
 
 class Laser(pygame.sprite.Sprite):
@@ -56,19 +59,32 @@ for i in range(50):
 player = Player()
 all_sprite_list.add(player)
 
+sound = pygame.mixer.Sound("Demos_Pygame/sounds/laser.ogg")
+
 while not done:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			done = True
 
-		if event.type == pygame.MOUSEBUTTONDOWN:
-			laser = Laser()
-			laser.rect.x = player.rect.x + 45
-			laser.rect.y = player.rect.y - 20
+		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_LEFT:
+				player.changespeed(-3)
+			if event.key == pygame.K_RIGHT:
+				player.changespeed(3)
+			if event.key == pygame.K_SPACE:
+				laser = Laser()
+				laser.rect.x = player.rect.x + 45
+				laser.rect.y = player.rect.y - 20
 
-			laser_list.add(laser)
-			all_sprite_list.add(laser)
+				laser_list.add(laser)
+				all_sprite_list.add(laser)
+				sound.play()
 
+		if event.type == pygame.KEYUP:
+			if event.key == pygame.K_LEFT:
+				player.changespeed(3)
+			if event.key == pygame.K_RIGHT:
+				player.changespeed(-3)
 
 	all_sprite_list.update() 
 
@@ -94,6 +110,6 @@ while not done:
 pygame.quit()
 
 """
-Curso de pygame 2020: Disparando con el mouse
-https://www.youtube.com/watch?v=s5npAv2mc7E&list=PLuB3bC9rWQAu6cGeRo_I6QV8cz1_2V6uM&index=13
+Curso de pygame 2020: Clase Juego
+https://www.youtube.com/watch?v=fRvhfyGyB4Y&list=PLuB3bC9rWQAu6cGeRo_I6QV8cz1_2V6uM&index=16
 """
