@@ -110,6 +110,7 @@ while not done:
 pygame.quit()
 
 """
+Clase Juego
 Curso de pygame 2020: Clase Juego
 https://www.youtube.com/watch?v=fRvhfyGyB4Y&list=PLuB3bC9rWQAu6cGeRo_I6QV8cz1_2V6uM&index=16
 """
