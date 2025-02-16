@@ -344,7 +344,6 @@ combate.jugar()
 Propuesta de Siguientes Commits:
 - Consultar Pygame y diferentes videos de Youtube para decidir como seguir adelante.
     Por ejemplo:
-
     · Creating a Pokémon inspired RPG in Python & Pygame
     https://www.youtube.com/watch?v=fo4e3njyGy0
 
@@ -356,5 +355,5 @@ Propuesta de Siguientes Commits:
     https://www.youtube.com/watch?v=tRo-RhXd1LI
 
     https://whackahack.com/foro/threads/crear-un-juego-de-pokemon-para-torpes-by-ericlostie.66429/
-    Come On
+    Fin Pygame Separado
 """
