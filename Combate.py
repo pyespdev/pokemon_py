@@ -355,5 +355,12 @@ Propuesta de Siguientes Commits:
     https://www.youtube.com/watch?v=tRo-RhXd1LI
 
     https://whackahack.com/foro/threads/crear-un-juego-de-pokemon-para-torpes-by-ericlostie.66429/
-    Fin Pygame Separado
+    
+    · Desinstalar pygame
+        pip uninstall pygame
+    · Instalar pygame-ce (cool edition)
+        pip install pygame-ce
+    · Los mapas utilizan Tiled
+        pip install pytmx
+
 """
