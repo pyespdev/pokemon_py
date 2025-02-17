@@ -1,0 +1,8 @@
+# Ignorar el directorio audio
+Pygame/audio/
+
+# Ignorar el directorio data
+Pygame/data/
+
+# Ignorar el directorio graphics
+Pygame/graphics/

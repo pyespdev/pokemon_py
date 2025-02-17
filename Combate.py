@@ -346,6 +346,8 @@ Propuesta de Siguientes Commits:
     Por ejemplo:
     · Creating a Pokémon inspired RPG in Python & Pygame
     https://www.youtube.com/watch?v=fo4e3njyGy0
+    CONTINUAR AQUÍ: 53:29 Overworld animations
+    https://youtu.be/fo4e3njyGy0?t=3209&si=hdnnRQOTQtH3IsQm
 
     · Python Pokemon - Python Class Tutorial for Beginners
     https://www.youtube.com/watch?v=Pbs6jQZrZA4
