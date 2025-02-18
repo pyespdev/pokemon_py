@@ -2,9 +2,11 @@ from settings import *
 from pytmx.util_pygame import load_pygame
 from os.path import join
 
-from sprites import Sprite
+from sprites import Sprite, AnimatedSprite
 from entities import Player
 from groups import AllSprites
+
+from  support import *
 
 class Game:
 	def __init__(self):
@@ -17,13 +19,16 @@ class Game:
 		self.all_sprites = AllSprites()
 
 		self.import_assets()
-		self.setup(self.tmx_maps['hospital'], 'world')
+		self.setup(self.tmx_maps['world'], 'house')
 
 	def import_assets(self):
 		self.tmx_maps = {
 			'world': load_pygame(join('Pygame', 'data', 'maps', 'world.tmx')),
 			'hospital': load_pygame(join('Pygame', 'data', 'maps', 'hospital.tmx')),
 			}
+		self.overworld_frames = {
+			'water': import_folder('Pygame', 'graphics', 'tilesets', 'water')
+		}
 	
 	def setup(self, tmx_map, player_start_pos):
 		# terrain
@@ -39,6 +44,12 @@ class Game:
 		for obj in tmx_map.get_layer_by_name('Entities'):
 			if obj.name == 'Player' and obj.properties['pos'] == player_start_pos:
 				  self.player = Player((obj.x, obj.y), self.all_sprites)
+
+		# water
+		for obj in tmx_map.get_layer_by_name('Water'):
+			for x in range(int(obj.x), int(obj.x + obj.width), TILE_SIZE):
+				for y in range(int(obj.y), int(obj.y + obj.height), TILE_SIZE):
+					AnimatedSprite((x, y), self.overworld_frames['water'], self.all_sprites)
 
 	def run(self):
 		while True:
