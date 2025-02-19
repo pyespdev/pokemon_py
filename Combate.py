@@ -341,28 +341,6 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-Propuesta de Siguientes Commits:
-- Consultar Pygame y diferentes videos de Youtube para decidir como seguir adelante.
-    Por ejemplo:
-    · Creating a Pokémon inspired RPG in Python & Pygame
-    https://www.youtube.com/watch?v=fo4e3njyGy0
     CONTINUAR AQUÍ: 1:08:50 Overworld animations (COAST)
     https://youtu.be/fo4e3njyGy0?si=w_5jNXvd4lzZLy3d&t=4130
-
-    · Python Pokemon - Python Class Tutorial for Beginners
-    https://www.youtube.com/watch?v=Pbs6jQZrZA4
-
-    [ESPAÑOL] Identico al anterior
-    · Curso Python Pokemon (¡FÁCIL!) - Python Clases y Objetos
-    https://www.youtube.com/watch?v=tRo-RhXd1LI
-
-    https://whackahack.com/foro/threads/crear-un-juego-de-pokemon-para-torpes-by-ericlostie.66429/
-    
-    · Desinstalar pygame
-        pip uninstall pygame
-    · Instalar pygame-ce (cool edition)
-        pip install pygame-ce
-    · Los mapas utilizan Tiled
-        pip install pytmx
-
 """
