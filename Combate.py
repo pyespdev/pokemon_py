@@ -341,6 +341,11 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 1:08:50 Overworld animations (COAST)
-    https://youtu.be/fo4e3njyGy0?si=w_5jNXvd4lzZLy3d&t=4130
+    CONTINUAR AQUÍ: 1:20:38 Overworld animations (COAST)
+    https://youtu.be/fo4e3njyGy0?si=qzMjWcQYbh6NC90f&t=4838
+
+    DESCARGAR TILESETS
+    Por ejemplo de https://eeveeexpo.com/resources/1631/
+
+    DESCARGAR PROYECTOS DE TILED: .tmx
 """

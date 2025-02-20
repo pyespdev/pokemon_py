@@ -27,8 +27,10 @@ class Game:
 			'hospital': load_pygame(join('Pygame', 'data', 'maps', 'hospital.tmx')),
 			}
 		self.overworld_frames = {
-			'water': import_folder('Pygame', 'graphics', 'tilesets', 'water')
+			'water': import_folder('Pygame', 'graphics', 'tilesets', 'water'),
+			'coast': coast_importer(24, 12, 'Pygame', 'graphics', 'tilesets', 'coast')
 		}
+		print(self.overworld_frames['coast'])
 	
 	def setup(self, tmx_map, player_start_pos):
 		# terrain
