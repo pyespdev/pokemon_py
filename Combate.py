@@ -341,7 +341,7 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 1:20:38 Overworld animations (COAST)
+    CONTINUAR AQUÍ: 1:23:30 (CHARACTERS)
     https://youtu.be/fo4e3njyGy0?si=qzMjWcQYbh6NC90f&t=4838
 
     DESCARGAR TILESETS
