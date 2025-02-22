@@ -28,9 +28,10 @@ class Game:
 			}
 		self.overworld_frames = {
 			'water': import_folder('Pygame', 'graphics', 'tilesets', 'water'),
-			'coast': coast_importer(24, 12, 'Pygame', 'graphics', 'tilesets', 'coast')
+			'coast': coast_importer(24, 12, 'Pygame', 'graphics', 'tilesets', 'coast'),
+			'characters': all_characters_import('Pygame', 'graphics', 'characters')
 		}
-		#print(self.overworld_frames['coast'])
+		#print(self.overworld_frames['characters'])
 	
 	def setup(self, tmx_map, player_start_pos):
 		# terrain
