@@ -341,7 +341,7 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 1:36:11 (CHARACTERS) Antes de Entities.py
+    CONTINUAR AQUÍ: 1:42:15 (CHARACTERS) Player Andando
     https://youtu.be/fo4e3njyGy0?si=7KkKwD5Nyi4xpGdq&t=5771
 
     DESCARGAR TILESETS
