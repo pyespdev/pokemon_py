@@ -1,12 +1,13 @@
 from settings import * 
 
 class Entity(pygame.sprite.Sprite):
-	def __init__(self, pos, frames, groups):
+	def __init__(self, pos, frames, groups, facing_direction):
 		super().__init__(groups)
+		self.z = WORLD_LAYERS['main']
 		
 		# graphics
 		self.frame_index, self.frames = 0, frames
-		self.facing_direction = 'down'
+		self.facing_direction = facing_direction
 
 		# movement
 		self.direction = vector()
@@ -15,6 +16,7 @@ class Entity(pygame.sprite.Sprite):
 		# sprite setup
 		self.image = self.frames[self.get_state()][self.frame_index]
 		self.rect = self.image.get_frect(center = pos)
+		self.y_sort = self.rect.centery
 		
 	def animate(self, dt):
 		self.frame_index += ANIMATION_SPEED * dt
@@ -29,9 +31,13 @@ class Entity(pygame.sprite.Sprite):
 				self.facing_direction = 'down' if self.direction.y > 0 else 'up'
 		return f'{self.facing_direction}{'' if moving else '_idle'}'
 
+class Character(Entity):
+	def __init__(self, pos, frames, groups, facing_direction):
+		super().__init__(pos, frames, groups, facing_direction)
+
 class Player(Entity):
-	def __init__(self, pos, frames, groups):
-		super().__init__(pos, frames, groups)
+	def __init__(self, pos, frames, groups, facing_direction):
+		super().__init__(pos, frames, groups, facing_direction)
 
 	def input(self):
 		keys = pygame.key.get_pressed()
@@ -50,6 +56,7 @@ class Player(Entity):
 		self.rect.center += self.direction * self.speed * dt
 
 	def update(self, dt):
+		self.y_sort = self.rect.centery
 		self.input()
 		self.move(dt)
 		self.animate(dt)
