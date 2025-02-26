@@ -341,14 +341,8 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 2:20:00 (COLISIONES) Inicio Colisiones
-    https://youtu.be/fo4e3njyGy0?si=2aiJu0GqY9IwvwH3&t=8400
-
-    1:49:00 Inicio Character
-    1:54:55 Inicio Hierba
-    1:58:15 Inicio Capas
-    2:16:00 Añadir Sombra
-    2:20:00 Inicio Colisiones
+    CONTINUAR AQUÍ: 2:45:43 Inicio Sistema de Diálogo
+    https://youtu.be/fo4e3njyGy0?si=LAeBj2SzM4FF3a2A&t=9943
 
     DESCARGAR TILESETS
     Por ejemplo de https://eeveeexpo.com/resources/1631/
