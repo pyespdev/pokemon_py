@@ -342,7 +342,10 @@ combate.jugar()
 
 """
     CONTINUAR AQUÍ: 2:45:43 Inicio Sistema de Diálogo
-    https://youtu.be/fo4e3njyGy0?si=LAeBj2SzM4FF3a2A&t=9943
+    https://youtu.be/fo4e3njyGy0?si=RM7KMprFbWRwtefa&t=12628
+
+    2:45:43 Inicio Sistema de Diálogo
+    3:30:28 Continuar Diálogo
 
     DESCARGAR TILESETS
     Por ejemplo de https://eeveeexpo.com/resources/1631/
