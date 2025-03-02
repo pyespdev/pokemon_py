@@ -341,12 +341,11 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 3:48:43 Diálogo debería mover
-    https://youtu.be/fo4e3njyGy0?si=hXvIbjY6vOuz2j1c&t=13713
+    CONTINUAR AQUÍ: 4:00:00 Final Sistema de Diálogo
+    https://youtu.be/fo4e3njyGy0?si=Z9FZG39k3y9nwnpQ&t=14400
 
     2:45:43 Inicio Sistema de Diálogo
-    3:30:28 Continuar Diálogo
-    3:48:43 Diálogo debería mover pero no se mueve
+    4:00:00 Final Sistema de Diálogo
 
     DESCARGAR TILESETS
     Por ejemplo de https://eeveeexpo.com/resources/1631/
