@@ -341,11 +341,18 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 4:00:00 Final Sistema de Diálogo
-    https://youtu.be/fo4e3njyGy0?si=Z9FZG39k3y9nwnpQ&t=14400
+    CONTINUAR AQUÍ: 4:20:26 Final Sistema de Niveles
+    https://youtu.be/fo4e3njyGy0?si=z1QSI5Bzr48HpJJ6&t=15626
 
-    2:45:43 Inicio Sistema de Diálogo
-    4:00:00 Final Sistema de Diálogo
+    4:00:00 Inicio Sistema Niveles
+    4:20:26 Inicio Monstruos
+    
+    Lógica Sistema Niveles
+    1. Poner pantalla en Negro
+    2. Eliminar todos los sprites
+    3. Relanzar self.setup en main.py con otro mapa
+
+    Capa Transition en Tiled (pos, target)
 
     DESCARGAR TILESETS
     Por ejemplo de https://eeveeexpo.com/resources/1631/
