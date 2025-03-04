@@ -341,15 +341,11 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 6:28:11 Final Botón START
-    https://youtu.be/fo4e3njyGy0?si=5xIC28a2e-1O2q6m&t=23291
-
-    4:00:00 Inicio Sistema Niveles
-    4:20:26 Inicio Monstruos
-    https://youtu.be/fo4e3njyGy0?si=z1QSI5Bzr48HpJJ6&t=15626
+    CONTINUAR AQUÍ: 7:28:41 Continuación Combate
+    https://youtu.be/fo4e3njyGy0?si=I9vKHJTsTGnjm6X9&t=26921
     
-    Estas 2 horas (de 4:20:26 a 6:28:11)
-    Se han copiado y pegado del Drive del Proyecto
-    https://drive.google.com/drive/folders/12T4zuZchZRmQQ5I3s7SxoA5aRnoytbJP
+    6:28:11 Inicio Combate
 
+    Drive del Proyecto
+    https://drive.google.com/drive/folders/12T4zuZchZRmQQ5I3s7SxoA5aRnoytbJP
 """
