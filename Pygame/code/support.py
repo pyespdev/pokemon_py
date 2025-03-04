@@ -57,7 +57,7 @@ def character_importer(cols, rows, *path):
 		new_dict[f'{direction}_idle'] = [frame_dict[(0, row)]]
 	return new_dict
 
-def all_characters_import(*path):
+def all_character_import(*path):
 	new_dict = {}
 	for _, __, image_names in walk(join(*path)):
 		for image in image_names:
@@ -86,20 +86,31 @@ def tmx_importer(*path):
 			tmx_dict[file.split('.')[0]] = load_pygame(join(folder_path, file))
 	return tmx_dict
 
+def monster_importer(cols, rows, *path):
+	monster_dict = {}
+	for folder_path, sub_folders, image_names in walk(join(*path)):
+		for image in image_names:
+			image_name = image.split('.')[0]
+			monster_dict[image_name] = {}
+			frame_dict = import_tilemap(cols, rows, *path, image_name)
+			for row, key in enumerate(('idle', 'attack')):
+				monster_dict[image_name][key] = [frame_dict[(col,row)] for col in range(cols)]
+	return monster_dict
+
 # game functions
+def draw_bar(surface, rect, value, max_value, color, bg_color, radius = 1):
+	ratio = rect.width / max_value
+	bg_rect = rect.copy()
+	progress = max(0, min(rect.width,value * ratio))
+	progress_rect = pygame.FRect(rect.topleft, (progress,rect.height))
+	pygame.draw.rect(surface, bg_color, bg_rect, 0, radius)
+	pygame.draw.rect(surface, color, progress_rect, 0, radius)
+
 def check_connections(radius, entity, target, tolerance = 30):
 	relation = vector(target.rect.center) - vector(entity.rect.center)
 	if relation.length() < radius:
 		if entity.facing_direction == 'left' and relation.x < 0 and abs(relation.y) < tolerance or\
-			entity.facing_direction == 'right' and relation.x > 0 and abs(relation.y) < tolerance or\
-			entity.facing_direction == 'up' and relation.y < 0 and abs(relation.x) < tolerance or\
-			entity.facing_direction == 'down' and relation.y > 0 and abs(relation.x) < tolerance :
+		   entity.facing_direction == 'right' and relation.x > 0 and abs(relation.y) < tolerance or\
+		   entity.facing_direction == 'up' and relation.y < 0 and abs(relation.x) < tolerance or\
+		   entity.facing_direction == 'down' and relation.y > 0 and abs(relation.x) < tolerance:
 			return True
-
-"""
-	ratio = rect.size[0] / max_value
-	bg_rect = rect.copy()
-	progress_rect = pygame.FRect(rect.topleft, (max(0, value) * ratio, rect.size[1]))
-	pygame.draw.rect(surface, bg_color, bg_rect,0,radius)
-	pygame.draw.rect(surface, color, progress_rect,0,radius)
-"""

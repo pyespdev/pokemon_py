@@ -341,20 +341,15 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 4:20:26 Final Sistema de Niveles
-    https://youtu.be/fo4e3njyGy0?si=z1QSI5Bzr48HpJJ6&t=15626
+    CONTINUAR AQUÍ: 6:28:11 Final Botón START
+    https://youtu.be/fo4e3njyGy0?si=5xIC28a2e-1O2q6m&t=23291
 
     4:00:00 Inicio Sistema Niveles
     4:20:26 Inicio Monstruos
+    https://youtu.be/fo4e3njyGy0?si=z1QSI5Bzr48HpJJ6&t=15626
     
-    Lógica Sistema Niveles
-    1. Poner pantalla en Negro
-    2. Eliminar todos los sprites
-    3. Relanzar self.setup en main.py con otro mapa
+    Estas 2 horas (de 4:20:26 a 6:28:11)
+    Se han copiado y pegado del Drive del Proyecto
+    https://drive.google.com/drive/folders/12T4zuZchZRmQQ5I3s7SxoA5aRnoytbJP
 
-    Capa Transition en Tiled (pos, target)
-
-    DESCARGAR TILESETS
-    Por ejemplo de https://eeveeexpo.com/resources/1631/
-    DESCARGAR PROYECTOS DE TILED: .tmx
 """

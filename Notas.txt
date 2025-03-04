@@ -29,3 +29,7 @@ Roca
 Tierra
 Veneno
 Volador
+
+DESCARGAR TILESETS
+Por ejemplo de https://eeveeexpo.com/resources/1631/
+DESCARGAR PROYECTOS DE TILED: .tmx
