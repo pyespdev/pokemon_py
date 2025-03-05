@@ -341,11 +341,18 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 7:28:41 Continuación Combate
-    https://youtu.be/fo4e3njyGy0?si=I9vKHJTsTGnjm6X9&t=26921
+    CONTINUAR AQUÍ: 8:47:23 Lógica Combate
+    https://youtu.be/fo4e3njyGy0?si=0V6tBLQJE7ktDjsg&t=31642
     
-    6:28:11 Inicio Combate
+    6:28:11 Configuración Combate
+    7:28:41 Interfaz Combate
+    8:47:23 Lógica Combate
 
     Drive del Proyecto
     https://drive.google.com/drive/folders/12T4zuZchZRmQQ5I3s7SxoA5aRnoytbJP
+
+    Videos PixelArt
+    https://www.youtube.com/watch?v=SJF3HZHffAI
+    Como usar Tiled
+    https://www.youtube.com/watch?v=Z_7COcLeYFY
 """
