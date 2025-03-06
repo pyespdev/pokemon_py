@@ -120,6 +120,22 @@ def outline_creator(frame_dict, width):
 				outline_frame_dict[monster][state].append(new_surf)
 	return outline_frame_dict
 
+def attack_importer(*path):
+	attack_dict = {}
+	for folder_path, _, image_names in walk(join(*path)):
+		for image in image_names:
+			image_name = image.split('.')[0]
+			attack_dict[image_name] = list(import_tilemap(4,1,folder_path, image_name).values())
+	return attack_dict
+
+def audio_importer(*path):
+	files = {}
+	for folder_path, _, file_names in walk(join(*path)):
+		for file_name in file_names:
+			full_path = join(folder_path, file_name)
+			files[file_name.split('.')[0]] = pygame.mixer.Sound(full_path)
+	return files
+
 # game functions
 def draw_bar(surface, rect, value, max_value, color, bg_color, radius = 1):
 	ratio = rect.width / max_value

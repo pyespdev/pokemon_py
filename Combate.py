@@ -341,12 +341,8 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 8:47:23 Lógica Combate
-    https://youtu.be/fo4e3njyGy0?si=0V6tBLQJE7ktDjsg&t=31642
-    
-    6:28:11 Configuración Combate
-    7:28:41 Interfaz Combate
-    8:47:23 Lógica Combate
+    TUTORIAL FINALIZADO
+    https://youtu.be/fo4e3njyGy0?si=E2d4zhoQSSeKxb8O
 
     Drive del Proyecto
     https://drive.google.com/drive/folders/12T4zuZchZRmQQ5I3s7SxoA5aRnoytbJP
@@ -355,4 +351,9 @@ combate.jugar()
     https://www.youtube.com/watch?v=SJF3HZHffAI
     Como usar Tiled
     https://www.youtube.com/watch?v=Z_7COcLeYFY
+
+    LISTA BUGS:
+    -   En Batalla a veces cuando un enemigo es derrotado y quedan más enemigos, no se puede continuar el combate
+        es como si le tocara el turno al enemigo debilitado.
+    - Cuando aparece la animación de Evolución, se sigue pudiendo tener conversación
 """
