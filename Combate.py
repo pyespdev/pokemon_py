@@ -343,7 +343,6 @@ combate.jugar()
 """
     TUTORIAL FINALIZADO
     https://youtu.be/fo4e3njyGy0?si=E2d4zhoQSSeKxb8O
-
     Drive del Proyecto
     https://drive.google.com/drive/folders/12T4zuZchZRmQQ5I3s7SxoA5aRnoytbJP
 
@@ -351,6 +350,21 @@ combate.jugar()
     https://www.youtube.com/watch?v=SJF3HZHffAI
     Como usar Tiled
     https://www.youtube.com/watch?v=Z_7COcLeYFY
+
+    ANIMATED SPRITES 768x384
+    8 imágenes (mínimo 4 para probar) 
+
+    ICONS
+    El tamaño no es Fijo
+    1 Imagen
+
+    SPRITES
+    https://www.reddit.com/r/beadsprites/comments/uxn37q/compilation_of_pok%C3%A9mon_sprites_gen_17_numbered/
+    https://drive.google.com/drive/folders/17Q_B4Si4YbED5MV72EPd8MaleGLayxXM?usp=sharing
+
+    https://www.spriters-resource.com/
+    https://www.spriters-resource.com/3ds/pokemonbattletrozei/sheet/64891/
+    https://www.spriters-resource.com/mobile/pokemonsmile/
 
     LISTA BUGS:
     -   En Batalla a veces cuando un enemigo es derrotado y quedan más enemigos, no se puede continuar el combate
