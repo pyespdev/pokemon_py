@@ -370,4 +370,7 @@ combate.jugar()
     -   En Batalla a veces cuando un enemigo es derrotado y quedan más enemigos, no se puede continuar el combate
         es como si le tocara el turno al enemigo debilitado.
     - Cuando aparece la animación de Evolución, se sigue pudiendo tener conversación
+
+    SPRITES DE PIXELMON
+    https://www.youtube.com/watch?v=4L_72xLQ_jo
 """
