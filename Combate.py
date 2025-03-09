@@ -341,13 +341,36 @@ combate = Combate(Combate.elegir_pokemon_jugador(), Combate.elegir_pokemon_opone
 combate.jugar()
 
 """
-    CONTINUAR AQUÍ: 4:00:00 Final Sistema de Diálogo
-    https://youtu.be/fo4e3njyGy0?si=Z9FZG39k3y9nwnpQ&t=14400
+    TUTORIAL FINALIZADO
+    https://youtu.be/fo4e3njyGy0?si=E2d4zhoQSSeKxb8O
+    Drive del Proyecto
+    https://drive.google.com/drive/folders/12T4zuZchZRmQQ5I3s7SxoA5aRnoytbJP
 
-    2:45:43 Inicio Sistema de Diálogo
-    4:00:00 Final Sistema de Diálogo
+    Videos PixelArt
+    https://www.youtube.com/watch?v=SJF3HZHffAI
+    Como usar Tiled
+    https://www.youtube.com/watch?v=Z_7COcLeYFY
 
-    DESCARGAR TILESETS
-    Por ejemplo de https://eeveeexpo.com/resources/1631/
-    DESCARGAR PROYECTOS DE TILED: .tmx
+    ANIMATED SPRITES 768x384
+    8 imágenes (mínimo 4 para probar) 
+
+    ICONS
+    El tamaño no es Fijo
+    1 Imagen
+
+    SPRITES
+    https://www.reddit.com/r/beadsprites/comments/uxn37q/compilation_of_pok%C3%A9mon_sprites_gen_17_numbered/
+    https://drive.google.com/drive/folders/17Q_B4Si4YbED5MV72EPd8MaleGLayxXM?usp=sharing
+
+    https://www.spriters-resource.com/
+    https://www.spriters-resource.com/3ds/pokemonbattletrozei/sheet/64891/
+    https://www.spriters-resource.com/mobile/pokemonsmile/
+
+    LISTA BUGS:
+    -   En Batalla a veces cuando un enemigo es derrotado y quedan más enemigos, no se puede continuar el combate
+        es como si le tocara el turno al enemigo debilitado.
+    - Cuando aparece la animación de Evolución, se sigue pudiendo tener conversación
+
+    SPRITES DE PIXELMON
+    https://www.youtube.com/watch?v=4L_72xLQ_jo
 """
