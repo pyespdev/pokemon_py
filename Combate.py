@@ -373,4 +373,20 @@ combate.jugar()
 
     SPRITES DE PIXELMON
     https://www.youtube.com/watch?v=4L_72xLQ_jo
+
+    CONVERTIR GIFS A SPRITES
+    https://ezgif.com/gif-to-sprite/
+
+    DESCOMPRIMIR GIF
+    https://es.bloggif.com/gif-extract
+    CONVERTIR A SPRITE SHEET
+    https://tools23.com/tools/sprites/pngs-to-sprite-sheet/
+
+    PASOS PARA REALIZAR LOS SPRITESHEETS
+    1-Descargar los GIFs 
+    2-Descomprimir GIF (768x384) -> https://es.bloggif.com/gif-extract
+    3-Convertir a Sprite Sheet 8x8 (768x384)
+
+    LIBRESPRITE - COMO HACER SPRITESHEETS
+    https://www.youtube.com/watch?v=TPXzVd7b5Fg
 """
