@@ -351,12 +351,8 @@ combate.jugar()
     Como usar Tiled
     https://www.youtube.com/watch?v=Z_7COcLeYFY
 
-    ANIMATED SPRITES 768x384
-    8 imágenes (mínimo 4 para probar) 
-
-    ICONS
-    El tamaño no es Fijo
-    1 Imagen
+    ANIMATED SPRITES 768x384 - 8 imágenes (mínimo 4 para probar)
+    ICONS - El tamaño no es Fijo (1 Imagen)
 
     SPRITES
     https://www.reddit.com/r/beadsprites/comments/uxn37q/compilation_of_pok%C3%A9mon_sprites_gen_17_numbered/
@@ -389,4 +385,7 @@ combate.jugar()
 
     LIBRESPRITE - COMO HACER SPRITESHEETS
     https://www.youtube.com/watch?v=TPXzVd7b5Fg
+
+    Primera prueba con Tiled
+    pueblo1.tmx
 """
