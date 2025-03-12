@@ -386,6 +386,17 @@ combate.jugar()
     LIBRESPRITE - COMO HACER SPRITESHEETS
     https://www.youtube.com/watch?v=TPXzVd7b5Fg
 
-    Primera prueba con Tiled
-    pueblo1.tmx
+    NOMBRES CAPAS UTILIZADAS TILED (TMX)
+    - Capa de Patrones:
+        · Terrain Top
+        · Terrain
+    - Capa de Objetos:
+        · Water
+        · Transition
+        · Collisions
+        · Objects
+        · Monsters
+        · Coast
+        · Entities
+
 """
