@@ -11,3 +11,4 @@ Si Zaragoza:
 Contratación de Ayundante
 
 Hecho primer mapa: Expo
+    - Añadir Agua, Costa
