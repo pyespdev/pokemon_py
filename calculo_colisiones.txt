@@ -51,3 +51,45 @@ SIN HACER
 (52,45) - (52,53)
 (52,53) - (67,53)
 (67,45) - (67,53)
+
+
+CALCULO TILESETS
+- SHINYGOLD2
+· tilewidth: 32
+· tileeight: 32
+· tilecount: 2144
+· columns:   8
+· width:     256
+· height:    8600
+
+- TORRE_AGUA
+· tilewidth: 32
+· tileeight: 32
+· tilecount: 3034
+· columns:   37
+· width:     1184
+· height:    2624
+
+- PRUEBAPILAR
+· tilewidth: 32
+· tileeight: 32
+· tilecount: 7800
+· columns:   100
+· width:     3200
+· height:    2496
+
+TAMAÑO TEÓRICO:
+· Torre del Agua: (224x480)
+    · Ancho: 32 px * 7 cols -> 224
+    · Alto: 32 px *  15 rows -> 480
+· El Pilar: (480x320) -> 382x287
+    · Ancho: 32 px * 15 cols -> 480
+    · Alto: 32 px *  10 rows -> 320
+    11x8
+
+    9x32 = 288
+    12x32 = 384
+
+    372x278
+    11x32 = 352
+    
