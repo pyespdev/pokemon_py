@@ -31,3 +31,6 @@ De Imagen a Pixel:
 
     El Pilar
     Torre del Agua
+
+Quitar fondo con PowerPoint
+Trabajar con .bmp
