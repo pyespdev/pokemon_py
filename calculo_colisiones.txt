@@ -62,34 +62,11 @@ CALCULO TILESETS
 · width:     256
 · height:    8600
 
-- TORRE_AGUA
-· tilewidth: 32
-· tileeight: 32
-· tilecount: 3034
-· columns:   37
-· width:     1184
-· height:    2624
-
-- PRUEBAPILAR
-· tilewidth: 32
-· tileeight: 32
-· tilecount: 7800
-· columns:   100
-· width:     3200
-· height:    2496
-
 TAMAÑO TEÓRICO:
-· Torre del Agua: (224x480)
-    · Ancho: 32 px * 7 cols -> 224
-    · Alto: 32 px *  15 rows -> 480
-· El Pilar: (480x320) -> 382x287
-    · Ancho: 32 px * 15 cols -> 480
-    · Alto: 32 px *  10 rows -> 320
-    11x8
+· Torre del Agua: 8x16 (256x512)
+    · Ancho: 32 px * 8 cols -> 256
+    · Alto: 32 px * 16 rows -> 512
 
-    9x32 = 288
-    12x32 = 384
-
-    372x278
-    11x32 = 352
-    
+· El Pilar: 16x8 (512x256)
+    · Ancho: 32 px * 16 cols -> 512
+    · Alto: 32 px * 8 rows -> 256

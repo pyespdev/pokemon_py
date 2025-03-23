@@ -32,5 +32,8 @@ De Imagen a Pixel:
     El Pilar
     Torre del Agua
 
-Quitar fondo con PowerPoint
-Trabajar con .bmp
+Quitar fondo con PowerPoint:
+    Barra de Herramientas, Formato de imagen > Quitar fondo
+    Formato > Quitar fondo
+Trabajar con .bmp:
+    Redimensionar imagen (Paint) antes de añadir a Tiled
