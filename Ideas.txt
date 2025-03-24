@@ -36,4 +36,7 @@ Quitar fondo con PowerPoint:
     Barra de Herramientas, Formato de imagen > Quitar fondo
     Formato > Quitar fondo
 Trabajar con .bmp:
-    Redimensionar imagen (Paint) antes de añadir a Tiled
+    Redimensionar imagen (Paint
+    ) antes de añadir a Tiled
+
+Revisar Pokemon Iberia
