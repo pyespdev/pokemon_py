@@ -40,3 +40,5 @@ Trabajar con .bmp:
     ) antes de añadir a Tiled
 
 Revisar Pokemon Iberia
+
+Comparar con ARM (examen AOC)
