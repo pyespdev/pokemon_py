@@ -40,5 +40,4 @@ Trabajar con .bmp:
     ) antes de añadir a Tiled
 
 Revisar Pokemon Iberia
-
-Avalar Hipoteca
+Ideas de Realms Of Pixel
