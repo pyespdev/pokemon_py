@@ -39,5 +39,6 @@ Trabajar con .bmp:
     Redimensionar imagen (Paint
     ) antes de añadir a Tiled
 
-Revisar Pokemon Iberia
-Ideas de Realms Of Pixel
+Repensar mecánica combate
+
+Formación
