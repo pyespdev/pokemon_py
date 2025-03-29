@@ -39,6 +39,4 @@ Trabajar con .bmp:
     Redimensionar imagen (Paint
     ) antes de añadir a Tiled
 
-Repensar mecánica combate
-
-Formación
+Comodín
