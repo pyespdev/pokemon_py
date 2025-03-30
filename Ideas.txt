@@ -39,4 +39,4 @@ Trabajar con .bmp:
     Redimensionar imagen (Paint
     ) antes de añadir a Tiled
 
-Comodín
+Organizado en StudioProjects > Graficos
