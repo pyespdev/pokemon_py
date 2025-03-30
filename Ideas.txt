@@ -11,3 +11,32 @@ Si Zaragoza:
 Contratación de Ayundante
 
 Hecho primer mapa: Expo
+    - Añadir Agua, Costa
+
+Canales PixelArt:
+    · Omel Pixela
+    https://www.youtube.com/watch?v=YyC2i91EwNw
+
+Contenido Descargable PixelArt:
+    https://opengameart.org/content/16x16-rpg-tilesets
+
+    https://opengameart.org/content/2d-lost-garden-zelda-style-tiles-resized-to-32x32-with-additions
+
+Generadores de Pixel en Linea:
+    · Pixel It 
+    · Pixie Engine
+
+De Imagen a Pixel:
+    · https://pixelartmaker.com/
+
+    El Pilar
+    Torre del Agua
+
+Quitar fondo con PowerPoint:
+    Barra de Herramientas, Formato de imagen > Quitar fondo
+    Formato > Quitar fondo
+Trabajar con .bmp:
+    Redimensionar imagen (Paint
+    ) antes de añadir a Tiled
+
+Organizado en StudioProjects > Graficos
