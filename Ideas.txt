@@ -39,4 +39,4 @@ Trabajar con .bmp:
     Redimensionar imagen (Paint
     ) antes de añadir a Tiled
 
-Semifinal_2
+Brujas y Flandes
