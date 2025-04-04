@@ -39,4 +39,12 @@ Trabajar con .bmp:
     Redimensionar imagen (Paint
     ) antes de añadir a Tiled
 
-Brujas y Flandes
+
+Crea tu Videojuego con Pygame: Curso Completo
+https://www.youtube.com/watch?v=BUcSWQxY0MI
+Tiles
+https://itch.io/game-assets/free
+https://itch.io/game-assets/free/tag-tilemap
+https://cainos.itch.io/pixel-art-top-down-basic
+
+No funciona cambiando en world.tmx 'monsters'
