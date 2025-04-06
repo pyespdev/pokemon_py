@@ -48,3 +48,9 @@ https://itch.io/game-assets/free/tag-tilemap
 https://cainos.itch.io/pixel-art-top-down-basic
 
 No funciona cambiando en world.tmx 'monsters'
+
+Estructura:
+    - Motor del Juego
+    - Gráficos: mapa
+    - Gráficos: monsters
+    - Gráficos: sprites personajes
