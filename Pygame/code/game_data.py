@@ -328,8 +328,9 @@ MONSTER_DATA = {
 		'abilities': {0: 'scratch', 5: 'spark', 15: 'splash', 20: 'ice', 25: 'heal'},
 		'evolve': None},
 	'Bulbasaur': {
-		'stats': {'element': 'water', 'max_health': 13, 'max_energy': 20, 'attack': 4, 'defense': 6, 'recovery': 1.3, 'speed': 2},
-		'abilities': {0: 'scratch', 5: 'spark', 15: 'splash', 20: 'ice', 25: 'heal'},
+		'stats': {'element': 'plant', 'max_health': 13, 'max_energy': 20, 'attack': 4, 'defense': 6, 'recovery': 1.3, 'speed': 2},
+		#'abilities': {0: 'scratch', 5: 'spark', 15: 'splash', 20: 'ice', 25: 'heal'},
+		'abilities': {0: 'prueba'},
 		'evolve': None},
 }
 
@@ -344,4 +345,5 @@ ATTACK_DATA = {
 	'explosion':  {'target': 'opponent', 'amount': 2,    'cost': 90, 'element': 'fire',   'animation': 'explosion'},
 	'annihilate': {'target': 'opponent', 'amount': 3,    'cost': 30, 'element': 'fire',   'animation': 'explosion'},
 	'ice':        {'target': 'opponent', 'amount': 2,    'cost': 15, 'element': 'water',  'animation': 'ice'},
+	'prueba':     {'target': 'opponent', 'amount': 2,    'cost': 15, 'element': 'plant',  'animation': 'green'},
 }
