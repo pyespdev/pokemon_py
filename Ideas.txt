@@ -54,3 +54,5 @@ Estructura:
     - Gráficos: mapa
     - Gráficos: monsters
     - Gráficos: sprites personajes
+
+Idea Savegame
