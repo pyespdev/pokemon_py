@@ -60,13 +60,4 @@ Idea Savegame:
 Pygame Tutorial - Save/Load System
 https://www.youtube.com/watch?v=3IfQQHZ_rqM
 
-Divulgador Ensamblador
-dr.santi.scagliusi
-
-Convención ARM
-Cambio de Registros
-R0, R1, R2, R3
-parámetros de entrada y resultado
-en llamadas a subrutinas
-
-LaLiga Clásico
+Pre Zanzíbar
