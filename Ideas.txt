@@ -60,4 +60,4 @@ Idea Savegame:
 Pygame Tutorial - Save/Load System
 https://www.youtube.com/watch?v=3IfQQHZ_rqM
 
-Tutoría Inducción
+Repaso DGA
