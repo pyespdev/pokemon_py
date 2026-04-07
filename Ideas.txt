@@ -60,4 +60,4 @@ Idea Savegame:
 Pygame Tutorial - Save/Load System
 https://www.youtube.com/watch?v=3IfQQHZ_rqM
 
-Rennala y Radahn
+Día 1 Bayer Ángela
